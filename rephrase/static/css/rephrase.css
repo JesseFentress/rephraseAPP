@@ -1,0 +1,17 @@
+h3 {
+    color: #6495ED;
+}
+
+.header {
+    background-color: #6495ED;
+}
+
+.hd-link {
+    color: antiquewhite;
+    text-decoration: none;
+}
+
+.hd-link:hover {
+    background-color:antiquewhite;
+    color: #6495ED;
+}

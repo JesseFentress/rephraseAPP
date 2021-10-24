@@ -1,0 +1,23 @@
+{% extends 'home.html' %}
+
+{%  block content %}
+    
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li> {{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h2>Sign up</h2>
+    <form method="POST" class="form">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+            <tr>
+                <td></td>
+                <td><button type="submit" class="btn">Sign Up</button></td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}
