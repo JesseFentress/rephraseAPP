@@ -6,7 +6,6 @@
     {% block title %}<title>Rephrase</title>{% endblock %}
     <link rel="stylesheet" href="{% static 'css/rephrase.css' %}">
 </head>
-
 <body>
     <header class="header">
         <img src="#" id="logo">
@@ -19,8 +18,8 @@
         <h3>Inter-language Communication Made Easy</h3>
     </section>
     <section>
-        <button class="btn-home" id="login">Log In</button>
-        <a href="http://127.0.0.1:8000/sign-up/"><button class="btn-home" id="sign-up">Sign Up</button></a>
+        <a href="{% url 'login' %}"><button class="btn-home" id="login">Log In</button></a>
+        <a href="{% url 'sign-up' %}"><button class="btn-home" id="sign-up">Sign Up</button></a>
     </section>
 </body>
 {% endblock %}

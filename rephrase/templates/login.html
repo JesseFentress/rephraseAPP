@@ -1,6 +1,6 @@
 {% extends 'home.html' %}
 {% load static %}
-{% block content %}
+{%  block content %}
 
     {% if messages %}
         <ul>
@@ -9,10 +9,10 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <h2>Sign up</h2>
+    <h2>Login</h2>
     <form method="POST" class="form">
         {% csrf_token %}
-        {% for field in form %}
+        {% for field in log_form %}
         <p>
             {{ field.label_tag }}
             {{ field }}
@@ -22,8 +22,13 @@
             {%  for error in field.errors %}
                 <p style="color: red;"> {{ error }}</p>
             {% endfor %}
+            {% if log_form.non_field_errors %}
+                <p style="color: red;">
+                {{ log_form.non_field_errors }}
+                </p>
+            {% endif %}
         </p>
         {% endfor %}
-            <button type="submit" class="btn">Sign Up</button>
+            <button type="submit" class="btn">Login</button>
     </form>
 {% endblock %}
