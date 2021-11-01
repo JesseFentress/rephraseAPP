@@ -1,9 +1,9 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
-from rephrase.forms import UserRegistrationForm, UserAuthenticationForm
+from rephrase.forms import UserRegistrationForm, UserProfileForm
 
 
 # Create your views here.
@@ -16,13 +16,12 @@ def sign_up(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Thanks for joining!')
-            user = authenticate(email=request.POST['email'], password=request.POST['password1'])
+            user = form.save()
             login(request, user)
             return redirect('account')
         else:
             context['form'] = form
+
     else:
         form = UserRegistrationForm()
         context['form'] = form
@@ -35,17 +34,24 @@ def user_login(request):
     if user.is_authenticated:
         return redirect('account')
     if request.method == 'POST':
-        form = UserAuthenticationForm(request.POST)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            user = authenticate(email=request.POST['email'], password=request.POST['password'])
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
 
-            if user:
+            if user is not None:
                 login(request, user)
                 return redirect('account')
     else:
-        form = UserAuthenticationForm()
+        form = AuthenticationForm()
         context['log_form'] = form
     return render(request, 'login.html', context)
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('home')
 
 
 def account(request):

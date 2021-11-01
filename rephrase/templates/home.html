@@ -17,9 +17,15 @@
         <h1>Rephrase {{ titles }}</h1>
         <h3>Inter-language Communication Made Easy</h3>
     </section>
+
     <section>
-        <a href="{% url 'login' %}"><button class="btn-home" id="login">Log In</button></a>
-        <a href="{% url 'sign-up' %}"><button class="btn-home" id="sign-up">Sign Up</button></a>
+        {% if user.is_authenticated %}
+            Hello {{ user.username }}
+            <a href="{% url 'logout' %}"><button class="btn-home" id="logout">Log Out</button></a>
+        {% else %}
+            <a href="{% url 'login' %}"><button class="btn-home" id="login">Log In</button></a>
+            <a href="{% url 'sign-up' %}"><button class="btn-home" id="sign-up">Sign Up</button></a>
+        {% endif %}
     </section>
 </body>
 {% endblock %}

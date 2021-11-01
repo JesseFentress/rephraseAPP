@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-
+from rephraseAPP.settings import LANGUAGE_CHOICES
 
 # Create your models here.
 
@@ -21,19 +21,11 @@ class UserManager(BaseUserManager):
         return user
 
     def create_superuser(self, username, email, first_name, last_name, password):
-        user = self.create_user(email=self.normalize_email(email, username=username, first_name=first_name, last_name=last_name, password=password))
+        user = self.create_user(email=self.normalize_email(email), username=username, first_name=first_name, last_name=last_name, password=password)
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
         return user
-
-
-class Profile(models.Model):
-    profile_id = models.AutoField(verbose_name='profile id', unique=True, primary_key=True)
-    language = models.CharField(verbose_name='language', max_length=2, null=False, default='en')
-    theme = models.CharField(verbose_name='theme', max_length=20, null=False, default='Light')
-    contact_id = models.IntegerField(verbose_name='contact id', unique=True, null=False)
-    profile_img = models.ImageField(verbose_name='profile img', null=True)
 
 
 class User(AbstractBaseUser):
@@ -43,7 +35,6 @@ class User(AbstractBaseUser):
     first_name = models.CharField(verbose_name='first name', max_length=20, null=False)
     last_name = models.CharField(verbose_name='last name', max_length=20, null=False)
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)
-    profile_id = models.OneToOneField(Profile, verbose_name='profile', null=True, on_delete=models.CASCADE)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -51,8 +42,8 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     def __str__(self):
         return self.username
@@ -62,6 +53,15 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+class Profile(models.Model):
+    profile_id = models.AutoField(verbose_name='profile id', unique=True, primary_key=True)
+    language = models.CharField(verbose_name='language', max_length=5, choices=LANGUAGE_CHOICES, default='en')
+    theme = models.CharField(verbose_name='theme', max_length=20, null=True, default='Light')
+    contact_id = models.IntegerField(verbose_name='contact id', unique=True, null=True)
+    profile_img = models.ImageField(verbose_name='profile img', null=True)
+    user = models.OneToOneField(User, verbose_name='user id', null=True, on_delete=models.CASCADE)
 
 
 class Server(models.Model):
