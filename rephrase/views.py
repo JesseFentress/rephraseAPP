@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
-from rephrase.forms import UserRegistrationForm, UserProfileForm
+from rephrase.forms import UserRegistrationForm
 
 
 # Create your views here.

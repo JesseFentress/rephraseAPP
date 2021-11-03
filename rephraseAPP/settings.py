@@ -99,20 +99,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#AUTH_USER_MODEL = 'rephrase.User'
+AUTH_USER_MODEL = 'rephrase.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-LANGUAGE_CHOICES = (
-        ('en', _('English')),
-        ('de', _('German')),
-        ('es', _('Spanish'))
-    )
+# LANGUAGE_CHOICES = (
+#         ('en', _('English')),
+#         ('de', _('German')),
+#         ('es', _('Spanish'))
+#     )
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Eastern'
 
 USE_I18N = True
 

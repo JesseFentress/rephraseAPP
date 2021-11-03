@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from rephrase.models import User, Profile
-from rephraseAPP.settings import LANGUAGE_CHOICES
+from rephrase.models import User
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -10,15 +9,15 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        fields = ('username', 'email', 'first_name', 'last_name', 'language', 'password1', 'password2')
 
 
-class UserProfileForm(forms.ModelForm):
-    language = forms.ChoiceField(label='Select Your Language', choices=LANGUAGE_CHOICES, widget=forms.Select())
+# class UserProfileForm(forms.ModelForm):
+#     language = forms.ChoiceField(label='Select Your Language', choices=LANGUAGE_CHOICES, widget=forms.Select())
 
-    class Meta:
-        model = Profile
-        fields = ('language',)
+#     class Meta:
+#         model = Profile
+#         fields = ('language',)
 
 
 
