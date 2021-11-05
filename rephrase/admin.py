@@ -5,7 +5,7 @@ from rephrase.models import User, Profile, Message, Server, Chat
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['user_id', 'username', 'email', 'first_name', 'last_name', 'date_joined', 'is_staff']
+    list_display = ['user_id', 'username', 'email', 'first_name', 'last_name', 'language', 'date_joined', 'profile_img', 'is_staff']
 
 
 class ProfileAdmin(admin.ModelAdmin):

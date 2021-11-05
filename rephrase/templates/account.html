@@ -1,7 +1,32 @@
 {% extends 'home.html' %}
 {% load static %}
 {% block content %}
-    <h2>Account</h2>
 
+    {% if user.is_authenticated %}
+        <div class="profile">
+            <div class="profile_header">
+                <h2 class="account_titles">Hello, {{ user.username }}!</h2>
+                <img class="profile_img" src="{{ user.profile_img.url }}" alt="profile image" width="240">
+            </div>
+            <div class="profile_info">
+                <ul class="profile_list"></ul>
+                    <li class="profile_item">{{ user.first_name }} {{ user.last_name }}</li>
+                    <li class="profile_item">{{ user.email }}</li>
+                    <li class="profile_item">{{ user.date_joined }}</li>
+                <li class="profile_item"><a href="{% url 'edit' %}"><button class="account-button" id="edit account">Edit Profile</button></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="friends">
+            <div class="friends_header">
+                 <h2 class="account_titles" id="friends_title">Friends</h2>
+                <div class="buttons">
+                    <button class="btn-acc" id="add_friend">Add</button>
+                    <button class="btn-acc" id="search_friend">Search</button>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
 
 {% endblock %}

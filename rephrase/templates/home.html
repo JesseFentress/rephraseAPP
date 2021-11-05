@@ -4,29 +4,31 @@
 <head>
     <meta charset="UTF-8">
     {% block title %}<title>Rephrase</title>{% endblock %}
-    <link rel="stylesheet" href="{% static 'css/rephrase.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/rephrase.css' %}">
 </head>
 <body>
     <header class="header">
-        <img src="#" id="logo">
-        <a class="hd-link" href="http://127.0.0.1:8000/home/" class="link">Home</a>
-        <a class="hd-link" href="https://github.com/JesseFentress/rephraseAPP" class="link">GitHub</a>
+        <nav>
+            <ul class="nav_tabs">
+                <li><a class="hd-link" href="http://127.0.0.1:8000/home/" class="link">Home</a></li>
+                <li><a class="hd-link" href="https://github.com/JesseFentress/rephraseAPP" class="link">GitHub</a></li>
+                {% if user.is_authenticated %}
+                    <li><a class="hd-link" href="{% url 'account' %}"> My Account</a></li>
+                    <li><a class="hd-link" href="{% url 'logout' %}">Log Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}"><button class="btn-home" id="login">Log In</button></a></li>
+                    <li> <a href="{% url 'sign-up' %}"><button class="btn-home" id="sign-up">Sign Up</button></a></li>
+                {% endif %}
+            </ul>
+        </nav>
     </header>
     {% block content %}
-    <section class="brand">
+    <div class="brand">
         <h1>Rephrase {{ titles }}</h1>
         <h3>Inter-language Communication Made Easy</h3>
-    </section>
+    </div>
 
-    <section>
-        {% if user.is_authenticated %}
-            Hello {{ user.username }}
-            <a href="{% url 'logout' %}"><button class="btn-home" id="logout">Log Out</button></a>
-        {% else %}
-            <a href="{% url 'login' %}"><button class="btn-home" id="login">Log In</button></a>
-            <a href="{% url 'sign-up' %}"><button class="btn-home" id="sign-up">Sign Up</button></a>
-        {% endif %}
-    </section>
 </body>
 {% endblock %}
 </html>

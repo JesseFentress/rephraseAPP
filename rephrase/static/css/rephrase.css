@@ -1,17 +1,113 @@
-h3 {
-    color: #6495ED;
+* {
+    font-family: Bahnschrift;
+
 }
 
-.header {
-    background-color: #6495ED;
+body {
+    display: grid;
+    grid-template-columns: max-content auto max-content;
+    grid-template-rows: max-content;
+    grid-gap: 30px;
+    margin: 0;
+    background-color: #c1c8e4;
 }
 
-.hd-link {
-    color: antiquewhite;
+header {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    height: fit-content;
+}
+
+.brand {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+li {
+    list-style: none;
+}
+
+.hd-link li {
+    display: inline-block;
+}
+
+nav {
+    background-color: #5680e9;
+}
+
+a {
+    color: white;
     text-decoration: none;
 }
 
-.hd-link:hover {
-    background-color:antiquewhite;
-    color: #6495ED;
+.nav_tabs {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
 }
+.nav_tabs li a {
+    display: block;
+    padding: 15px 5px;
+}
+
+.hd-link {
+    padding: 15px;
+}
+
+.hd-link:hover {
+    background-color: antiquewhite;
+    color: #5680e9;
+}
+
+
+
+.profile {
+    margin-left: 50px;
+    display: block;
+    align-items: center;
+    width: fit-content;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    text-align: center;
+}
+
+.profile_info {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.profile_item {
+    margin: 15px 0px 15px 0px;
+    color:  #5680e9;
+}
+
+.friends {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    display: block;
+    align-items: center;
+    text-align: center;
+    margin-right: 50px;
+    width: 580px;
+}
+
+.friends_header {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.buttons {
+    float: right;
+    grid-column-start: 3;
+    grid-column-end: 4;
+}
+
+.account_titles {
+    color: #8860d0;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
