@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
-from rephrase.forms import UserRegistrationForm, UserProfileForm, EditUserForm
+from rephrase.forms import UserRegistrationForm, EditUserForm
 
 
 # Create your views here.
@@ -61,7 +61,7 @@ def account(request):
 def edit_account(request):
     context = {}
     user = request.user
-    edit_acc_form = EditUserForm(data=request.POST, instance=user)
+    edit_acc_form = EditUserForm(request.POST, request.FILES, instance=user)
     if edit_acc_form.is_valid():
         edit_acc_form.save()
         return redirect('account')

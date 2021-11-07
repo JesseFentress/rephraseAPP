@@ -3,8 +3,9 @@ from rephrase.models import User, Message, Server, Chat, Contact, UserFriend, Us
 # Register your models here.
 
 
-# class UserAdmin(admin.ModelAdmin):
-#     list_display = ['user_id', 'username', 'email', 'first_name', 'last_name', 'date_joined', 'is_staff']
+#class UserAdmin(admin.ModelAdmin):
+    #list_display = ['username', 'email', 'first_name', 'last_name', 'date_joined', 'language',
+                   # 'theme', 'profile_img', 'is_staff']
 
 
 # class ProfileAdmin(admin.ModelAdmin):
@@ -36,3 +37,4 @@ admin.site.register(Chat)
 admin.site.register(Contact)
 admin.site.register(UserFriend)
 admin.site.register(UserChat)
+

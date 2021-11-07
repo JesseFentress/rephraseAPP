@@ -7,7 +7,8 @@ from django.conf.global_settings import LANGUAGES
 
 class UserManager(BaseUserManager):
 
-    def create_user(self, username, email, first_name, last_name, language, password=None, is_admin=False, is_staff=False, is_superuser=False):
+    def create_user(self, username, email, first_name, last_name, language, password=None, is_admin=False,
+                    is_staff=False, is_superuser=False):
         if not username:
             raise ValueError("Username is required")
         if not email:
@@ -18,7 +19,9 @@ class UserManager(BaseUserManager):
             raise ValueError("Last Name is required")
         if not language:
             raise ValueError("Language is required")
-        user = self.model(email=self.normalize_email(email), username=username, first_name=first_name, last_name=last_name, language=language, is_admin=is_admin, is_staff=is_staff, is_superuser=is_superuser)
+        user = self.model(email=self.normalize_email(email), username=username, first_name=first_name,
+                          last_name=last_name, language=language, is_admin=is_admin, is_staff=is_staff,
+                          is_superuser=is_superuser)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -35,9 +38,6 @@ class UserManager(BaseUserManager):
             is_staff=True,
             is_superuser=True
         )
-        # user.is_admin = True
-        # user.is_staff = True
-        # user.is_superuser = True
         return user
 
 
@@ -50,12 +50,13 @@ class User(AbstractBaseUser):
     
     language = models.CharField(verbose_name='language', max_length=7, choices=LANGUAGES, default='en')
     theme = models.CharField(verbose_name='theme', max_length=20, null=True, default='Light')
-    profile_img = models.ImageField(verbose_name='profile img', null=True)
+    profile_img = models.ImageField(verbose_name='profile img', null=True, default='default.jpg', upload_to='images')
     
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+
 
     objects = UserManager()
 
@@ -70,15 +71,6 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-
-
-# class Profile(models.Model):
-#     profile_id = models.AutoField(verbose_name='profile id', unique=True, primary_key=True)
-#     language = models.CharField(verbose_name='language', max_length=5, choices=LANGUAGE_CHOICES, default='en')
-#     theme = models.CharField(verbose_name='theme', max_length=20, null=True, default='Light')
-#     contact_id = models.IntegerField(verbose_name='contact id', unique=True, null=True)
-#     profile_img = models.ImageField(verbose_name='profile img', null=True)
-#     user = models.OneToOneField(User, verbose_name='user id', null=True, on_delete=models.CASCADE)
 
 
 class Server(models.Model):
