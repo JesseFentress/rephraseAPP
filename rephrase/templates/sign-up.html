@@ -1,19 +1,12 @@
 {% extends 'home.html' %}
 {% load static %}
 {% block content %}
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li> {{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <div class="container">
     <h2>Sign up</h2>
     <form method="POST" class="form">
         {% csrf_token %}
         {% for field in form %}
-        <p>
+        <p class="p_form">
             {{ field.label_tag }}
             {{ field }}
             {% if field.help_text %}
@@ -26,4 +19,5 @@
         {% endfor %}
             <button type="submit" class="btn">Sign Up</button>
     </form>
+    </div>
 {% endblock %}

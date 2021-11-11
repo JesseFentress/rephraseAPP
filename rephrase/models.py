@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 # from rephraseAPP.settings import LANGUAGE_CHOICES
 from django.conf.global_settings import LANGUAGES
+from django.conf import settings
 
 # Create your models here.
 
@@ -98,6 +99,69 @@ class UserFriend(models.Model):
     user = models.ForeignKey(User, verbose_name='user', null=True, on_delete=models.CASCADE, related_name='user')
     friend = models.ForeignKey(User, verbose_name='friend', null=True, on_delete=models.CASCADE, related_name='friend')
 
+
+class FriendsList(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, verbose_name='user', null=True, on_delete=models.CASCADE, related_name='fl_user')
+    friends = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='friends', blank=True, related_name='friends')
+
+    def __str__(self):
+        return self.user.username
+
+    def add_friend(self, user):
+        if user not in self.friends.all():
+            self.friends.add(user)
+            self.save()
+
+    def remove_friend(self, user):
+        if user in self.friends.all():
+            self.friends.remove(user)
+            self.save()
+
+    def unfriend(self, unfriended):
+        my_friend_list = self
+        my_friend_list.remove_friend(unfriended)
+        unfriended_friend_list = FriendsList.objects.get(user=unfriended)
+        unfriended_friend_list.remove_friend(self.user)
+
+    def is_mutual_friend(self, friend):
+        if friend in self.friends.all():
+            return True
+        return False
+
+    def get_friends(self):
+        my_friend_list = self.friends.all()
+        f_list = []
+        for friend in my_friend_list:
+            list.append(friend)
+        return f_list
+
+
+class FriendRequest(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
+    is_active = models.BooleanField(blank=True, null=False, default=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.sender.username
+
+    def accept(self):
+        receiver_friends_list = FriendsList.objects.get(user=self)
+        if receiver_friends_list:
+            receiver_friends_list.add_friend(self.sender)
+            sender_fiends_list = FriendsList.objects.get(user=self.sender)
+            if sender_fiends_list:
+                sender_fiends_list.add_friend(self.receiver)
+                self.is_active = False
+                self.save()
+
+    def decline(self):
+        self.is_active = False
+        self.save()
+
+    def cancel(self):
+        self.is_active = False
+        self.save()
 
 class UserChat(models.Model):
     user = models.ForeignKey(User, verbose_name='user', null=False, on_delete=models.CASCADE)

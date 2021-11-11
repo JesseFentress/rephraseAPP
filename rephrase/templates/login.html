@@ -9,6 +9,8 @@
             {% endfor %}
         </ul>
     {% endif %}
+    <div class="login">
+    <div class="container">
     <h2>Login</h2>
     <form method="POST" class="form">
         {% csrf_token %}
@@ -31,4 +33,6 @@
         {% endfor %}
             <button type="submit" class="btn">Login</button>
     </form>
+    </div>
+    </div>
 {% endblock %}

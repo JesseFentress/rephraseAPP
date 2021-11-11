@@ -3,10 +3,34 @@
 {% block content %}
 
     {% if user.is_authenticated %}
+        <div class="popup">
+            <div class="container">
+            <div class="close" id="close">+</div>
+                <form method="POST" class="add_friend_form">
+                {% csrf_token %}
+                    <p>{{ error }}</p>
+                    <label for="friend_username">Find Friend</label>
+                    <input class="input" type="text" placeholder="Username" name="friend_username" required>
+                    <button type="submit">Add Friend</button>
+
+                </form>
+            <div>
+                <ul>
+                {% for user in users %}
+                        <li>
+                            <div class="user_list_entry"><img class="user_img" src="{{ user.profile_img.url }}" alt="user_profile_img" width="20">
+                            <p class="user_username">{{ user.username }}</p>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            </div>
+        </div>
         <div class="profile">
             <div class="profile_header">
                 <h2 class="account_titles">Hello, {{ user.username }}!</h2>
-                <img class="profile_img" src="{{ user.profile_img.url }}" alt="profile image" width="240">
+                <img class="profile_img" src="{{ user.profile_img.url }}" alt="profile image">
             </div>
             <div class="profile_info">
                 <ul class="profile_list"></ul>
@@ -21,12 +45,27 @@
             <div class="friends_header">
                  <h2 class="account_titles" id="friends_title">Friends</h2>
                 <div class="buttons">
-                    <button class="btn-acc" id="add_friend">Add</button>
+                    <button class="btn-acc" id="add_friend_btn" value="add_friend">Add</button>
                     <button class="btn-acc" id="search_friend">Search</button>
                 </div>
+            </div>
+            <div class="friends_list">
+                <ul>
+                    {% for friend in friends %}
+                        <li>
+                            <div class="user_list_entry">
+                                <img class="friend_img" src="{{ friend.profile_img.url }}" alt="friend_profile_img" width="50px" height="50px">
+                                <p class="friend_username">{{ friend.username }}</p>
+                                <button class="message_btn">Message</button>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
 
     {% endif %}
-
+{% block extrascripts %}<script src="{% static '/js/script.js' %}" type="text/javascript"></script>
+    {% endblock %}
 {% endblock %}
+

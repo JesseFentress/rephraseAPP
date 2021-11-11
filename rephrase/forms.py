@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from rephrase.models import User
+from rephrase.models import User, FriendsList
 from django.conf.global_settings import LANGUAGES
 
 
@@ -24,3 +24,9 @@ class EditUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('email', 'first_name', 'last_name', 'language', 'profile_img')
+
+
+class AddFriendForm(forms.ModelForm):
+    username = forms.CharField(label='Enter A Friends Username', max_length=30)
+
+
