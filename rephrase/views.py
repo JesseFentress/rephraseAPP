@@ -95,7 +95,7 @@ def getMessages(request, chat_name):
     messages = Message.objects.filter(chat=chat_details)
     users = []
     for message in messages:
-        users.append(User.objects.get(user=message.user_id)).username
+        users.append(message.user.username)
     return JsonResponse({'messages': list(messages.values()), 'users' : users})
     
 
