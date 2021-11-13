@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
 from rephrase.forms import UserRegistrationForm, EditUserForm
+from rephrase.models import Chat, Message, User
 
 
 # Create your views here.
@@ -69,3 +70,28 @@ def edit_account(request):
         edit_acc_form = EditUserForm()
         context['edit_acc_form'] = edit_acc_form
     return render(request, 'edit.html', context)
+
+
+def chat(request, chat_name):
+    username = 'temp_user'
+    chat_details = Chat.objects.get(name=chat_name)
+    
+    context = {'username' : username, 'chat_details' : chat_details}
+    return render(request, 'chat.html', context)
+
+def send(request):
+    message = request.POST['message']
+    username = request.POST['username']
+    chat_id = request.POST['chat_id']
+    
+    print("send view reached")
+    print(message)
+    print(username)
+    print(chat_id)
+    
+    new_message = Message.objects.create(text=message, user=User.objects.get(username=username), chat=Chat.objects.get(id=chat_id))
+    new_message.save()
+    
+    return HttpResponse('Message sent successfully')
+    
+
