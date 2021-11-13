@@ -2,12 +2,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponse, JsonResponse
 from django.http import HttpResponse
 from rephrase.forms import UserRegistrationForm, EditUserForm, AddFriendForm
 import json
 from rephrase.Graph import Graph
 from rephrase.forms import UserRegistrationForm, EditUserForm
 from rephrase.models import Chat, Message, User
+
 
 # Create your views here.
 from rephrase.models import FriendsList, User
@@ -136,5 +138,14 @@ def send(request):
     new_message.save()
     
     return HttpResponse('Message sent successfully')
-    
+
+def getMessages(request, chat_name):
+    chat_details = Chat.objects.get(name=chat_name)
+
+    messages = Message.objects.filter(chat=chat_details)
+    users = []
+    for message in messages:
+        users.append(User.objects.get(user=message.user_id)).username
+    return JsonResponse({'messages': list(messages.values()), 'users' : users})
+
 
