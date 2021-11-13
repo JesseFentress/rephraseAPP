@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     {% block title %}<title>Rephrase</title>{% endblock %}
-    <link rel="stylesheet" href="{% static 'css/rephrase.css' %}">
+
+<link rel="stylesheet" href="{% static 'css/rephrase.css' %}">
 </head>
 <body>
     <header class="header">
         <nav>
             <ul class="nav_tabs">
-                <li><a class="hd-link" href="{% url 'home' %}" class="link">Home</a></li>
-                <li><a class="hd-link" href="https://github.com/JesseFentress/rephraseAPP" class="link" target="_blank">GitHub</a></li>
+                <li><a class="hd-link" href="http://127.0.0.1:8000/home/" class="link">Home</a></li>
+                <li><a class="hd-link" href="https://github.com/JesseFentress/rephraseAPP" class="link">GitHub</a></li>
                 {% if user.is_authenticated %}
                     <li><a class="hd-link" href="{% url 'account' %}"> My Account</a></li>
                     <li><a class="hd-link" href="{% url 'logout' %}">Log Out</a></li>
@@ -23,12 +24,11 @@
         </nav>
     </header>
     {% block content %}
+    <div class="brand">
+        <h1>Rephrase {{ titles }}</h1>
+        <h3>Inter-language Communication Made Easy</h3>
+    </div>
 
-        <div class="brand">
-            <h1>Rephrase {{ titles }}</h1>
-            <h3>Inter-language Communication Made Easy</h3>
-        </div>
-{% block extrascripts %}<script src="{% static '/js/script.js' %}" type="text/javascript"></script>{% endblock %}
 </body>
 {% endblock %}
 </html>

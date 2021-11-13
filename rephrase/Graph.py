@@ -106,31 +106,23 @@ class Graph:
         queue = Queue()  # Holds visited vertices in this queue for printing once their connections are being looked at
         queue.enqueue(start_index)  # Adds start_index to the queue since it is the first visited index
         visited = [start_index]  # List to hold visited indices so that they do not get visited again
-        friends = []
+        friends = set()
         while not queue.is_Empty():  # As long as there are indices in the queue
             vertex = queue.dequeue()  # Vertex whose edges we want to look at is dequeued from the queue
-            friends.append(vertex)  # Print the vertex being looked at
+            friends.add(vertex)  # Print the vertex being looked at
             for edge in self.graph_dict[vertex]:  # For all the connections to the targeted vertex
                 if edge not in visited:  # If the connected vertex has not been visited
                     queue.enqueue(edge)  # Add unvisited vertex to queue
                     visited.append(edge)  # Mark the vertex as visited
         return friends
 
-    def bfs(self, start_index, target_index):  # Returns if a node can be found in a graph using BFS
-        if start_index == target_index:  # If the start_index is the target_index
-            return "Found: " + str(target_index) + " Path: " + start_index  # Return that the target and path
-        queue = Queue()  # Holds visited vertices in this queue for printing once their connections are being looked at
-        queue.enqueue(start_index)  # Adds start_index to the queue since it is the first visited index
-        visited = [start_index]  # List to hold visited indices so that they do not get visited again
-        while not queue.is_Empty():  # As long as there are indices in the queue
-            vertex = queue.dequeue()  # Vertex whose edges we want to look at is dequeued from the queue
-            for edge in self.graph_dict[vertex]:  # For all the connections to the targeted vertex
-                if edge == target_index:  # If the connected vertex is the target vertex
-                    return "Found: " + str(target_index) + " Path: " + str(visited)  # Return that the target and path
-                if edge not in visited:  # If the connected vertex is not the target and has not been visited
-                    queue.enqueue(edge)  # Add unvisited vertex to queue
-                    visited.append(edge)  # Mark the vertex as visited
-        return "Not found"  # Return that the target could not be found
+    def bfs(self):
+        friends = set()
+        for indices in self.graph_dict:
+            friends = friends.union(set(self.bfs_traversal(indices)))
+        f = list(friends)
+        return f
+
 
     def dfs_traversal(self, start_vertex):  # Prints out DFS traversal
         stack = Stack()  # Holds vertices that need to be come back to
