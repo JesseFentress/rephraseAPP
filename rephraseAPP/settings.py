@@ -137,3 +137,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'rephrase/static/media/images/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = 'home'
+
+APPEND_SLASH = False
