@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from rephrase.forms import UserRegistrationForm, EditUserForm
 from rephrase.models import Chat, Message, User
 
@@ -84,14 +84,18 @@ def send(request):
     username = request.POST['username']
     chat_id = request.POST['chat_id']
     
-    print("send view reached")
-    print(message)
-    print(username)
-    print(chat_id)
-    
     new_message = Message.objects.create(text=message, user=User.objects.get(username=username), chat=Chat.objects.get(id=chat_id))
     new_message.save()
     
     return HttpResponse('Message sent successfully')
+
+def getMessages(request, chat_name):
+    chat_details = Chat.objects.get(name=chat_name)
+    
+    messages = Message.objects.filter(chat=chat_details)
+    users = []
+    for message in messages:
+        users.append(User.objects.get(user=message.user_id)).username
+    return JsonResponse({'messages': list(messages.values()), 'users' : users})
     
 
