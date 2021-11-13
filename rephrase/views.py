@@ -101,10 +101,10 @@ def account(request):
                             suggested_friends_dict[friend_x] = []
         suggested_friends_graph = Graph(suggested_friends_dict)
         s = suggested_friends_graph.bfs_traversal(User.objects.get(username='test'))
-
+        f = list(friends)
         # Need to figure out how to filter out current friends + self
         for t in s:
-            if t in friends:
+            if t in f:
                 s.remove(t)
 
         context['suggested_friends'] = s
