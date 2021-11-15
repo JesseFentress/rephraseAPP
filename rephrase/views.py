@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse, JsonResponse
 from rephrase.forms import UserRegistrationForm, EditUserForm
-from rephrase.models import Chat, Message, User
+from rephrase.models import Chat, Message, User, UserChat
 
 
 # Create your views here.
@@ -72,12 +72,25 @@ def edit_account(request):
     return render(request, 'edit.html', context)
 
 
-def chat(request, chat_name):
-    username = 'temp_user'
-    chat_details = Chat.objects.get(name=chat_name)
+def chat_list(request):
+    current_user = request.user
+    userchats = UserChat.objects.filter(user=current_user)
+    chats = []
+    for userchat in userchats:
+        chats.append(userchat.chat)
+    
+    context = {'chats' : chats}
+    
+    return render(request, 'chat-list.html', context)
+
+
+def chat(request, chat_id):
+    username = request.user.username
+    chat_details = Chat.objects.get(id=chat_id)
     
     context = {'username' : username, 'chat_details' : chat_details}
     return render(request, 'chat.html', context)
+
 
 def send(request):
     message = request.POST['message']
@@ -89,8 +102,9 @@ def send(request):
     
     return HttpResponse('Message sent successfully')
 
-def getMessages(request, chat_name):
-    chat_details = Chat.objects.get(name=chat_name)
+
+def getMessages(request, chat_id):
+    chat_details = Chat.objects.get(id=chat_id)
     
     messages = Message.objects.filter(chat=chat_details)
     users = []

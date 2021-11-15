@@ -13,7 +13,7 @@
             <ul class="nav_tabs">
                 <li><a class="hd-link" href="{% url 'home' %}" class="link">Home</a></li>
                 <li><a class="hd-link" href="https://github.com/JesseFentress/rephraseAPP" class="link" target="_blank">GitHub</a></li>
-                <li><a class="hd-link" href="{% url 'chat' 'temp_chat' %}" class="link">Chat</a></li>
+                <li><a class="hd-link" href="{% url 'chat-list' %}" class="link">Chat</a></li>
                 {% if user.is_authenticated %}
                     <li><a class="hd-link" href="{% url 'account' %}"> My Account</a></li>
                     <li><a class="hd-link" href="{% url 'logout' %}">Log Out</a></li>

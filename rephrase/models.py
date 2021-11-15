@@ -75,11 +75,17 @@ class User(AbstractBaseUser):
 
 class Server(models.Model):
     name = models.CharField(verbose_name='server name', max_length=50, null=False)
+    
+    def __str__(self):
+        return self.name
 
 
 class Chat(models.Model):
     name = models.CharField(verbose_name='chat name', max_length=50)
     server = models.ForeignKey(Server, verbose_name='server', null=True, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.name
 
 
 class Message(models.Model):
@@ -87,6 +93,9 @@ class Message(models.Model):
     chat = models.ForeignKey(Chat, verbose_name='chat', on_delete=models.CASCADE, default=0)
     text = models.TextField(verbose_name='text', max_length=300)
     date_time = models.DateTimeField(verbose_name='datetime', auto_now_add=True)
+    
+    def __str__(self):
+        return self.text
 
 
 class Contact(models.Model):
