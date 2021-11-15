@@ -11,9 +11,10 @@ urlpatterns = [
     path('account/', views.account, name='account'),
     path('logout/', views.user_logout, name='logout'),
     path('edit/', views.edit_account, name='edit'),
-    path('<str:chat_name>/', views.chat, name='chat'),
+    path('chats/', views.chat_list, name='chat-list'),
+    path('chats/<int:chat_id>/', views.chat, name='chat'),
     path('send', views.send, name='send'),
-    path('getMessages/<str:chat_name>/', views.getMessages, name='getMessages')
+    path('getMessages/<int:chat_id>/', views.getMessages, name='getMessages')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()

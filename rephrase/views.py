@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse, JsonResponse
 from rephrase.forms import UserRegistrationForm, EditUserForm
-from rephrase.models import Chat, Message, User
+from rephrase.models import Chat, Message, User, UserChat
 from rephrase.Graph import Graph
 
 
@@ -26,6 +26,7 @@ def sign_up(request):
             return redirect('account')
         else:
             context['form'] = form
+
     else:
         form = UserRegistrationForm()
         context['form'] = form
@@ -113,10 +114,22 @@ def edit_account(request):
     return render(request, 'edit.html', context)
 
 
-def chat(request, chat_name):
-    username = 'temp_user'
-    chat_details = Chat.objects.get(name=chat_name)
+def chat_list(request):
+    current_user = request.user
+    userchats = UserChat.objects.filter(user=current_user)
+    chats = []
+    for userchat in userchats:
+        chats.append(userchat.chat)
 
+    context = {'chats' : chats}
+
+    return render(request, 'chat-list.html', context)
+
+
+def chat(request, chat_id):
+    username = request.user.username
+    chat_details = Chat.objects.get(id=chat_id)
+    
     context = {'username' : username, 'chat_details' : chat_details}
     return render(request, 'chat.html', context)
 
@@ -125,25 +138,18 @@ def send(request):
     message = request.POST['message']
     username = request.POST['username']
     chat_id = request.POST['chat_id']
-
-    print("send view reached")
-    print(message)
-    print(username)
-    print(chat_id)
-
     new_message = Message.objects.create(text=message, user=User.objects.get(username=username), chat=Chat.objects.get(id=chat_id))
     new_message.save()
-
     return HttpResponse('Message sent successfully')
 
 
-def getMessages(request, chat_name):
-    chat_details = Chat.objects.get(name=chat_name)
-
+def getMessages(request, chat_id):
+    chat_details = Chat.objects.get(id=chat_id)
+    
     messages = Message.objects.filter(chat=chat_details)
     users = []
     for message in messages:
-        users.append(User.objects.get(user=message.user_id)).username
+        users.append(message.user.username)
     return JsonResponse({'messages': list(messages.values()), 'users' : users})
-
+    
 

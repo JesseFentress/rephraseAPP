@@ -59,12 +59,6 @@ body {
     <h2>{{chat_details.name}} - DjChat</h2>
 
     <div id="display">
-    
-    <!-- <div class="container darker">
-      <b>Tom</b><p>Hello Everyone, How Are You Guys Doing?</p>
-      <span class="time-left">20th, April 2021</span>
-    </div> -->
-    
     </div>
 
     <script>
@@ -73,7 +67,7 @@ body {
 setInterval(function(){
     $.ajax({
         type: 'GET',
-        url : "/getMessages/{{chat_details.name}}/",
+        url : "/getMessages/{{chat_details.id}}/",
         success: function(response){
             console.log(response);
             $("#display").empty();
