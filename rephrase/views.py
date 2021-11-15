@@ -26,7 +26,6 @@ def sign_up(request):
             return redirect('account')
         else:
             context['form'] = form
-
     else:
         form = UserRegistrationForm()
         context['form'] = form
@@ -121,6 +120,7 @@ def chat(request, chat_name):
     context = {'username' : username, 'chat_details' : chat_details}
     return render(request, 'chat.html', context)
 
+
 def send(request):
     message = request.POST['message']
     username = request.POST['username']
@@ -135,6 +135,7 @@ def send(request):
     new_message.save()
 
     return HttpResponse('Message sent successfully')
+
 
 def getMessages(request, chat_name):
     chat_details = Chat.objects.get(name=chat_name)
