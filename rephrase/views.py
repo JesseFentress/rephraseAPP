@@ -3,12 +3,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse, JsonResponse
-from django.http import HttpResponse
-from rephrase.forms import UserRegistrationForm, EditUserForm, AddFriendForm
-import json
-from rephrase.Graph import Graph
 from rephrase.forms import UserRegistrationForm, EditUserForm
 from rephrase.models import Chat, Message, User
+from rephrase.Graph import Graph
 
 
 # Create your views here.
@@ -120,7 +117,7 @@ def edit_account(request):
 def chat(request, chat_name):
     username = 'temp_user'
     chat_details = Chat.objects.get(name=chat_name)
-    
+
     context = {'username' : username, 'chat_details' : chat_details}
     return render(request, 'chat.html', context)
 
@@ -128,15 +125,15 @@ def send(request):
     message = request.POST['message']
     username = request.POST['username']
     chat_id = request.POST['chat_id']
-    
+
     print("send view reached")
     print(message)
     print(username)
     print(chat_id)
-    
+
     new_message = Message.objects.create(text=message, user=User.objects.get(username=username), chat=Chat.objects.get(id=chat_id))
     new_message.save()
-    
+
     return HttpResponse('Message sent successfully')
 
 def getMessages(request, chat_name):
