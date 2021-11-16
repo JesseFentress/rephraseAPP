@@ -1,12 +1,17 @@
+{% extends 'home.html' %}
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block content %}
 <style>
 body {
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 0 20px;
+    display: grid;
+    grid-template-columns: auto max-content auto;
+    grid-template-rows: max-content;
+    grid-gap: 30px;
+    margin: 0;
+    background-color: #c1c8e4;
 }
 
 .container {
@@ -51,11 +56,18 @@ body {
   float: left;
   color: #999;
 }
+#display {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+
 </style>
 <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 </head>
-<body>
 
+<body>
+    <div class="chat_container">
     <h2>{{chat_details.name}} - DjChat</h2>
 
     <div id="display">
@@ -89,14 +101,14 @@ setInterval(function(){
         <style>
         input[type=text], select {
         width: 100%;
-        padding: 12px 20px;
+        padding: 12px 12px;
         margin: 8px 0;
         display: inline-block;
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
         }
-    
+
         input[type=submit] {
         width: 100%;
         background-color: #4CAF50;
@@ -118,7 +130,7 @@ setInterval(function(){
         padding: 20px;
         }
         </style>
-    
+        <div class="chat">
         <form id="post-form">
             {% csrf_token %}
             <input type="hidden" name="username" id="username" value="{{username}}"/>
@@ -126,8 +138,9 @@ setInterval(function(){
             <input type="text" name="message" id="message" width="100px" />
             <input type="submit" value="Send">
         </form>
+        </div>
     </div>
-    
+    </div>
 </body>
     
     <script type="text/javascript">
@@ -150,6 +163,7 @@ setInterval(function(){
         document.getElementById('message').value = ''
       });
     </script>
-    
+
+    {% endblock %}
     </html>
 

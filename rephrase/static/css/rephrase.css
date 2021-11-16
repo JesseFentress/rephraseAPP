@@ -82,6 +82,7 @@ a {
 .profile_info {
     width: fit-content;
     margin: 0 auto;
+    text-align: start;
 }
 
 .profile_item {
@@ -208,4 +209,17 @@ button:hover, button:focus {
 
 user_list_entry_self {
     display: none;
+}
+
+.chat_container {
+    grid-column-start: 2;
+}
+
+#display {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.message_friend {
+
 }

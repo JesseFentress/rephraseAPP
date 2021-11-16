@@ -37,7 +37,7 @@
                     <li class="profile_item">{{ user.first_name }} {{ user.last_name }}</li>
                     <li class="profile_item">{{ user.email }}</li>
                     <li class="profile_item">{{ user.date_joined }}</li>
-                <li class="profile_item"><a href="{% url 'edit' %}"><button class="account-button" id="edit account">Edit Profile</button></a></li>
+                <li class="profile_item"><a href="{% url 'edit' %}"><button class="account-button" id="{{ user.username}}">Edit Profile</button></a></li>
                 </ul>
             </div>
         </div>
@@ -55,8 +55,8 @@
                         <li>
                             <div class="user_list_entry">
                                 <img class="friend_img" src="{{ friend.profile_img.url }}" alt="friend_profile_img" width="50px" height="50px">
-                                <p class="friend_username">{{ friend.username }}</p>
-                                <button class="message_btn">Message</button>
+                                <p class="friend_username" id="friend_username">{{ friend.username }}</p>
+                                <button class="message_btn" id="message_btn">Message</button>
                             </div>
                         </li>
                     {% endfor %}

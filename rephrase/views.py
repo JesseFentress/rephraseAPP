@@ -6,6 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from rephrase.forms import UserRegistrationForm, EditUserForm
 from rephrase.models import Chat, Message, User, UserChat
 from rephrase.Graph import Graph
+import requests
 
 
 # Create your views here.
@@ -129,7 +130,7 @@ def chat_list(request):
 def chat(request, chat_id):
     username = request.user.username
     chat_details = Chat.objects.get(id=chat_id)
-    
+
     context = {'username' : username, 'chat_details' : chat_details}
     return render(request, 'chat.html', context)
 
@@ -149,7 +150,26 @@ def getMessages(request, chat_id):
     messages = Message.objects.filter(chat=chat_details)
     users = []
     for message in messages:
+
         users.append(message.user.username)
     return JsonResponse({'messages': list(messages.values()), 'users' : users})
-    
+
+
+#def start_chat(request):
+ #   user = request.user
+  #  chats = UserChat.objects.get(user=user.username)
+  #  friend_chat = 0
+   # for chat in chats:
+    #    if UserChat.objects.get(user=request.POST['friend_username']):
+     #       friend_chat = chat.chat_id
+      #      break;
+
+   # if friend_chat == 0:
+    #    user_chat = UserChat(username=user.username, chat_id=1)
+     #   user_chat.save()
+      #  user_chat = UserChat(username=request.POST['friend_username'], chat_id=1)
+       # user_chat.save()
+
+    #return redirect('chat')
+
 

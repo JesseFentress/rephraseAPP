@@ -1,18 +1,23 @@
 {% extends 'home.html' %}
 {% load static %}
 {%  block content %}
-<h2>Chat List</h2>
-<br>
 
-<ul>
-    {% for chat in chats %}
+    <div class="chat_list">
+        <h2>Chats</h2>
+        <ul>
+        {% for chat in chats %}
         <li>
-            <a href="{% url 'chat' chat.id %}">{{ chat.name }}</a>
+            <a href="{% url 'chat' chat.id %}">{{ chat.name }}>
+            {% for user in users %}
+                <img src="{{ user.profile_img }}">
+            {% endfor %}
+            </a>
         </li>
-    {% empty %}
+        {% empty %}
         <li>You are not in any chat groups.</li>
-    {% endfor %}
-  </ul>
+        {% endfor %}
+        </ul>
+    </div>
 
 
 
