@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from rephrase.models import User, FriendsList
+from rephrase.models import User, FriendsList, Chat
 from django.conf.global_settings import LANGUAGES
 
 
@@ -28,5 +28,14 @@ class EditUserForm(forms.ModelForm):
 
 class AddFriendForm(forms.ModelForm):
     username = forms.CharField(label='Enter A Friends Username', max_length=30)
+
+
+class CreateChatForm(forms.ModelForm):
+    chat_name = forms.CharField(label='Chat Name', max_length=50)
+    server = forms.IntegerField(label='Server Number')
+
+    class Meta:
+        model = Chat
+        fields = ('name', 'server',)
 
 

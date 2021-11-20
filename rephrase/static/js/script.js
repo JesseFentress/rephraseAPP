@@ -12,9 +12,9 @@ var close = document.getElementById('close');
       document.querySelector('.popup').style.display = 'none';
    });
 
-var homepopup = document.getElementById('login_btn');
+var chatpopup = document.getElementById('create_chat_btn');
 
-   homepopup.addEventListener('click', function() {
+   chatpopup.addEventListener('click', function() {
 
       document.querySelector('.popup').style.display = 'flex';
    });

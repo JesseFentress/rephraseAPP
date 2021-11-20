@@ -1,5 +1,6 @@
 {% extends 'home.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 
     {% if user.is_authenticated %}
@@ -9,9 +10,9 @@
                 <form method="POST" class="add_friend_form">
                 {% csrf_token %}
                     <p>{{ error }}</p>
-                    <label for="friend_username">Find Friend</label>
+                    <label for="friend_username">{% trans 'Find Friends' %}</label>
                     <input class="input" type="text" placeholder="Username" name="friend_username" required>
-                    <button type="submit">Add Friend</button>
+                    <button type="submit">{% trans 'Add Friend' %}</button>
 
                 </form>
             <div>
@@ -43,10 +44,10 @@
         </div>
         <div class="friends">
             <div class="friends_header">
-                 <h2 class="account_titles" id="friends_title">Friends</h2>
+                 <h2 class="account_titles" id="friends_title">{% trans 'Friends' %}</h2>
                 <div class="buttons">
-                    <button class="btn-acc" id="add_friend_btn" value="add_friend">Add</button>
-                    <button class="btn-acc" id="search_friend">Search</button>
+                    <button class="btn-acc" id="add_friend_btn" value="add_friend">{% trans 'Add' %}</button>
+                    <button class="btn-acc" id="search_friend">{% trans 'Search' %}</button>
                 </div>
             </div>
             <div class="friends_list">
@@ -56,7 +57,7 @@
                             <div class="user_list_entry">
                                 <img class="friend_img" src="{{ friend.profile_img.url }}" alt="friend_profile_img" width="50px" height="50px">
                                 <p class="friend_username" id="friend_username">{{ friend.username }}</p>
-                                <button class="message_btn" id="message_btn">Message</button>
+                                <button class="message_btn" id="message_btn">{% trans 'Message' %}</button>
                             </div>
                         </li>
                     {% endfor %}

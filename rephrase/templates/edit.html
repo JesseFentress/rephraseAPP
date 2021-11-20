@@ -1,9 +1,10 @@
 {% extends 'home.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
     <div class="container">
     <div class="edit_form">
-    <h2>Edit Account</h2>
+    <h2>{% trans 'Edit Account' %}</h2>
     <form method="POST" class="form" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in edit_acc_form %}
@@ -18,7 +19,7 @@
             {% endfor %}
         </p>
         {% endfor %}
-        <button type="submit" class="btn">Save 1</button>
+        <button type="submit" class="btn">{% trans 'Save' %}</button>
      </form>
     </div>
     </div>
