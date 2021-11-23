@@ -106,12 +106,6 @@ AUTH_USER_MODEL = 'rephrase.User'
 
 LANGUAGE_CODE = 'en-us'
 
-# LANGUAGE_CHOICES = (
-#         ('en', _('English')),
-#         ('de', _('German')),
-#         ('es', _('Spanish'))
-#     )
-
 TIME_ZONE = 'US/Eastern'
 
 USE_I18N = True

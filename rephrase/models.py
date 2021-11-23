@@ -58,7 +58,6 @@ class User(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
@@ -84,6 +83,7 @@ class Server(models.Model):
 class Chat(models.Model):
     name = models.CharField(verbose_name='chat name', max_length=50)
     server = models.ForeignKey(Server, verbose_name='server', null=True, on_delete=models.CASCADE)
+    user = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='chat_users', blank=True, related_name='chat_users')
     
     def __str__(self):
         return self.name
@@ -97,16 +97,6 @@ class Message(models.Model):
     
     def __str__(self):
         return self.text
-
-
-class Contact(models.Model):
-    user = models.OneToOneField(User, verbose_name='user', null=False, on_delete=models.CASCADE)
-
-
-class UserFriend(models.Model):
-    contact = models.ForeignKey(Contact, verbose_name="contacts", null=False, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, verbose_name='user', null=True, on_delete=models.CASCADE, related_name='user')
-    friend = models.ForeignKey(User, verbose_name='friend', null=True, on_delete=models.CASCADE, related_name='friend')
 
 
 class FriendsList(models.Model):
@@ -171,6 +161,7 @@ class FriendRequest(models.Model):
     def cancel(self):
         self.is_active = False
         self.save()
+
 
 class UserChat(models.Model):
     user = models.ForeignKey(User, verbose_name='user', null=False, on_delete=models.CASCADE)

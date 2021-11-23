@@ -11,20 +11,35 @@
     <header class="header">
         <nav>
             <ul class="nav_tabs">
-                <li><a class="hd-link" href="{% url 'home' %}" class="link">{% trans 'Home' %}</a></li>
-                <li><a class="hd-link" href="https://github.com/JesseFentress/rephraseAPP" class="link" target="_blank">GitHub</a></li>
+                <li><div class="nav_div"><a class="hd-link" href="{% url 'home' %}" class="link">{% trans 'Home' %}</a></li></div>
+                <li><div class="nav_div"><a class="hd-link" href="https://github.com/JesseFentress/rephraseAPP" class="link" target="_blank">GitHub</a></li></div>
                 {% if user.is_authenticated %}
-                    <li><a class="hd-link" href="{% url 'chat-list' %}" class="link">{% trans 'Chat' %}</a></li>
-                    <li><a class="hd-link" href="{% url 'account' %}"> {% trans 'My Account' %}</a></li>
-                    <li><a class="hd-link" href="{% url 'logout' %}">{% trans 'Log Out' %}</a></li>
+                    <li><div class="nav_div"><a class="hd-link" href="{% url 'chat-list' %}" class="link">{% trans 'Chat' %}</a></li></div>
+                    <li><div class="nav_div"><a class="hd-link" href="{% url 'account' %}"> {% trans 'My Account' %}</a></li></div>
+                    <li><div class="nav_div"><a class="hd-link" href="{% url 'logout' %}">{% trans 'Log Out' %}</a></li></div>
                 {% else %}
-                    <li><a class="hd-link" href="{% url 'login' %}">{% trans 'Log In' %}</a></li>
-                    <li><a class="hd-link" href="{% url 'sign-up' %}">{% trans 'Sign Up' %}</a></li>
+                    <li><div class="nav_div"><a class="hd-link" href="{% url 'login' %}">{% trans 'Log In' %}</a></li></div>
+                    <li><div class="nav_div"><a class="hd-link" href="{% url 'sign-up' %}">{% trans 'Sign Up' %}</a></li></div>
                 {% endif %}
             </ul>
         </nav>
     </header>
     {% block content %}
+        <div class="chat_list_area">
+    <div class="friends_header">
+                 <h2 class="account_titles" id="friends_title">{% trans 'Chats' %}</h2>
+                <div class="buttons">
+                    <button class="btn-chat" id="create_chat_btn" value="create_chat">{% trans 'Create Chat' %}</button>
+                </div>
+    <div class="chat_list">
+    {% for chat in chats %}
+        <div class="chat_list_entry">
+            <a class="chat_list_links" href="{% url 'chat' chat.id %}">{{ chat.name }}</a>
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+        </div>
     <div class="brand">
         <h1>Rephrase</h1>
         <h3>{% trans 'Inter-language Communication Made Easy' %}</h3>

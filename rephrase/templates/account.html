@@ -28,7 +28,7 @@
             </div>
             </div>
         </div>
-        <div class="profile">
+        <div class="left_side_container">
             <div class="profile_header">
                 <h2 class="account_titles">Hello, {{ user.username }}!</h2>
                 <img class="profile_img" src="{{ user.profile_img.url }}" alt="profile image">
@@ -46,7 +46,7 @@
             <div class="friends_header">
                  <h2 class="account_titles" id="friends_title">{% trans 'Friends' %}</h2>
                 <div class="buttons">
-                    <button class="btn-acc" id="add_friend_btn" value="add_friend">{% trans 'Add' %}</button>
+                    <button class="btn-acc" id="popup_btn" value="add_friend">{% trans 'Add' %}</button>
                     <button class="btn-acc" id="search_friend">{% trans 'Search' %}</button>
                 </div>
             </div>
@@ -66,7 +66,7 @@
         </div>
 
     {% endif %}
-{% block extrascripts %}<script src="{% static '/js/script.js' %}" type="text/javascript"></script>
+    {% block extrascripts %}<script src="{% static '/js/script.js' %}" type="text/javascript"></script>
     {% endblock %}
 {% endblock %}
 

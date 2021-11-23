@@ -9,7 +9,7 @@ body {
     grid-template-rows: max-content;
     grid-gap: 30px;
     margin: 0;
-    background-color: #c1c8e4;
+    background-color: whitesmoke;
 }
 
 header {
@@ -32,7 +32,12 @@ li {
 }
 
 nav {
-    background-color: #5680e9;
+    background-color: #007cc7;
+}
+
+.nav_div {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 a {
@@ -43,7 +48,7 @@ a {
 .nav_tabs {
     list-style-type: none;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: right;
     align-items: center;
     margin: 0;
 }
@@ -58,25 +63,26 @@ a {
 
 .hd-link:hover {
     background-color: antiquewhite;
-    color: #5680e9;
+    color: #007cc7;
 }
 
 
 
-.profile {
+.left_side_container {
     margin-left: 50px;
     display: block;
     align-items: center;
-    width: fit-content;
+    width: 200px;
     grid-column-start: 1;
     grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
     text-align: center;
     height: 400px;
-    border: #1b1b1b;
-    border-style: groove;
-    border-width: thin;
     padding-left: 15px;
     padding-right: 15px;
+    background-color: white;
+    border-radius: 5px;
 }
 
 .profile_info {
@@ -88,6 +94,7 @@ a {
 .profile_item {
     margin: 15px 0px 15px 0px;
     color:  #5680e9;
+    text-align-last: center;
 }
 
 .profile_img {
@@ -133,6 +140,9 @@ a {
     display: flex;
     margin-top: 10px;
     justify-content: space-between;
+    background: lightgray;
+    border-radius: 5px;
+    padding: 8px;
 }
 
 ul {
@@ -148,8 +158,9 @@ ul {
 
 }
 
-.friend_img {
+.friend_img, .user_img {
     border-radius: 50%;
+    width: 50px;
 }
 
 .popup {
@@ -204,10 +215,10 @@ button:hover, button:focus {
 }
 
 .user_info {
-    display: contents
+    display: contents;
 }
 
-user_list_entry_self {
+user_list_entry {
     display: none;
 }
 
@@ -218,7 +229,9 @@ user_list_entry_self {
 #display {
     height: 500px;
     overflow-y: scroll;
-    text-align: -webkit-center;
+    text-align-last: left;
+    padding-right: 5px;
+
 }
 
 .chat_list_area {
@@ -229,4 +242,40 @@ user_list_entry_self {
 
 .chat_list_links {
     color: #1b1b1b;
+}
+
+.chat_container {
+    background-color: #282a36;
+    border-radius: 5px;
+    text-align: -webkit-center;
+    justify-self: center;
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.chat_list_entry {
+    padding: 15px 0 15px 15px;
+    border-radius: 15px;
+    text-align: left;
+    background: lightgray;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 8px;
+
+}
+
+.chat_list_entry:hover {
+    background-color: #5680e9;
+}
+
+::-webkit-scrollbar  {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

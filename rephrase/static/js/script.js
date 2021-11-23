@@ -1,4 +1,5 @@
-var popup = document.getElementById('add_friend_btn');
+
+var popup = document.getElementById('popup_btn');
 
    popup.addEventListener('click', function() {
 
@@ -12,9 +13,11 @@ var close = document.getElementById('close');
       document.querySelector('.popup').style.display = 'none';
    });
 
-var chatpopup = document.getElementById('create_chat_btn');
+   var chatpopup = document.getElementById('create_chat_btn');
 
    chatpopup.addEventListener('click', function() {
 
       document.querySelector('.popup').style.display = 'flex';
    });
+
+

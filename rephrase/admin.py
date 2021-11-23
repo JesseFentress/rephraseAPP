@@ -1,5 +1,5 @@
 from django.contrib import admin
-from rephrase.models import User, Message, Server, Chat, Contact, UserFriend, UserChat, FriendsList, FriendRequest
+from rephrase.models import User, Message, Server, Chat, UserChat, FriendsList, FriendRequest
 # Register your models here.
 
 
@@ -19,19 +19,12 @@ class ServerAdmin(admin.ModelAdmin):
 
 
 class ChatAdmin(admin.ModelAdmin):
-    list_display = ['name', 'server_id']
+    list_display = ['name', 'server_id',]
+    list_filter = ['user']
 
 
 class UserChatAdmin(admin.ModelAdmin):
     list_display =['user', 'chat']
-
-
-class ContactAdmin(admin.ModelAdmin):
-    list_display = ['user']
-
-
-class UserFriendAdmin(admin.ModelAdmin):
-    list_display = ['contact', 'user', 'friend']
 
 
 class FriendsListAdmin(admin.ModelAdmin):
@@ -48,8 +41,6 @@ admin.site.register(Message, MessageAdmin)
 admin.site.register(Server, ServerAdmin)
 admin.site.register(Chat, ChatAdmin)
 admin.site.register(UserChat, UserChatAdmin)
-admin.site.register(Contact, ContactAdmin)
-admin.site.register(UserFriend, UserFriendAdmin)
 admin.site.register(FriendsList, FriendsListAdmin)
 admin.site.register(FriendRequest, FriendRequestAdmin)
 

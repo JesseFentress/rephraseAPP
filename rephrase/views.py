@@ -15,50 +15,8 @@ from rephrase.models import FriendsList, User
 
 
 def home(request):
-    user = request.user
-    if user.is_authenticated:
-        update_session(request, user)
     return render(request, 'home.html')
 
-
-def update_session(request, user):
-    request.session['username'] = user.username
-    suggested_friends(request, user)
-   # friends = friends_list.friends.all()  # cannot pass model obj into sess, must get usernames instead
-    #for friend in friends
-    #request.session['friends'] = friends
-    #request.session['sugg_friends'] = suggested_friends(request, user)
-
-def suggested_friends(request, user):
-    request.session['friends'] = []
-    request.session['sugg_friends'] = []
-    friend_list = FriendsList.objects.get(user=user)
-    if user:
-        friends = friend_list.friends.all()
-        if friends:
-            suggested_friends_dict = {User.objects.get(username=user.username): []}
-            for friend in friends:
-                request.session['friends'].append(friend.username)
-                friends_friends = FriendsList.objects.get(user=friend)
-                suggested_friends = friends_friends.friends.all()
-                my_friend = User.objects.get(username=friend)
-                if suggested_friends is not None:
-                    for suggestion in suggested_friends:
-                        friend_x = User.objects.get(username=suggestion)
-                        if my_friend in suggested_friends_dict.keys():
-                            suggested_friends_dict[my_friend].append(friend_x)
-                        else:
-                            suggested_friends_dict[my_friend] = [friend_x]
-                        if friend_x not in suggested_friends_dict.keys():
-                            suggested_friends_dict[friend_x] = []
-            suggested_friends_graph = Graph(suggested_friends_dict)
-            set_suggested_friends = set(suggested_friends_graph.bfs())
-            set_friends = set(friends)
-            set_friends.add(User.objects.get(username=user))
-            filtered_friends = set_suggested_friends.difference(set_friends)
-            for fr in filtered_friends:
-                request.session['sugg_friends'].append(fr.username)
-        return filtered_friends
 
 def sign_up(request):
     context = {}
@@ -158,29 +116,52 @@ def edit_account(request):
     return render(request, 'edit.html', context)
 
 
+def chat_redirect(request):
+    current_user = request.user
+    context= {}
+    userchats = list(Chat.objects.filter(user=current_user))
+    if len(userchats) == 0:
+        create_chat_form = CreateChatForm(request.user)
+        context['create_chat_form'] = create_chat_form
+        if request.method == 'POST':
+            form = CreateChatForm(request.user, request.POST)
+            if form.is_valid():
+                form.save(commit=False)
+                chat_name = form.cleaned_data['name']
+                form.save()
+                Chat.objects.get(name=chat_name).user.add(current_user)
+            else:
+                context['create_chat_form'] = create_chat_form
+        return render(request, 'empty-chat.html')
+    else:
+        return chat(request, userchats.pop().id)
+
+
 def chat_list(request):
     current_user = request.user
-    userchats = UserChat.objects.filter(user=current_user)
+    userchats = Chat.objects.filter(user=current_user)
     chats = []
-    for userchat in userchats:
-        chats.append(userchat.chat)
-
-    context = {'chats' : chats}
-
+    for chat in list(userchats):
+        chats.append(chat)
+    context = {'chats': chats}
     return context
 
 
 def chat(request, chat_id):
+    current_user = request.user
     username = request.user.username
     chat_details = Chat.objects.get(id=chat_id)
     context = {'username' : username, 'chat_details' : chat_details}
     context.update(chat_list(request))
-    create_chat_form = CreateChatForm()
+    create_chat_form = CreateChatForm(request.user)
     context['create_chat_form'] = create_chat_form
     if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
+        form = CreateChatForm(request.user,request.POST)
         if form.is_valid():
-            new_chat = form.save()
+            form.save(commit=False)
+            chat_name = form.cleaned_data['name']
+            form.save()
+            Chat.objects.get(name=chat_name).user.add(current_user)
         else:
             context['create_chat_form'] = create_chat_form
     return render(request, 'chat.html', context)
@@ -205,38 +186,3 @@ def getMessages(request, chat_id):
         users.append(message.user.username)
 
     return JsonResponse({'messages': list(messages.values()), 'users' : users})
-
-
-def translate_message(chat_id):
-    chat_details = Chat.objects.get(id=chat_id)
-
-    messages = list(Message.objects.filter(chat=chat_details))
-    new = []
-    url = "https://google-translate20.p.rapidapi.com/translate"
-    headers = {
-        'x-rapidapi-host': "google-translate20.p.rapidapi.com",
-        'x-rapidapi-key': "1bc48f3f83msh1aab1bdcb2f9ea9p102fdfjsn5799cd77b3d7"
-    }
-    for message in messages:
-        new.append(requests.request("GET", url, headers=headers, params=message))
-
-    return new
-
-#def start_chat(request):
- #   user = request.user
-  #  chats = UserChat.objects.get(user=user.username)
-  #  friend_chat = 0
-   # for chat in chats:
-    #    if UserChat.objects.get(user=request.POST['friend_username']):
-     #       friend_chat = chat.chat_id
-      #      break;
-
-   # if friend_chat == 0:
-    #    user_chat = UserChat(username=user.username, chat_id=1)
-     #   user_chat.save()
-      #  user_chat = UserChat(username=request.POST['friend_username'], chat_id=1)
-       # user_chat.save()
-
-    #return redirect('chat')
-
-
