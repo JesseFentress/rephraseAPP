@@ -25,9 +25,17 @@ body {
 }
 
 .darker {
-  border-color: #ccc;
-  background-color: #ddd;
+    border-color: #ccc;
+    background-color: #ddd;
+    float: left;
 }
+
+.lighter {
+    border-color: #ccc;
+    background-color: #007cc7 ;
+    float: right;
+}
+
 
 .container::after {
   content: "";
@@ -110,8 +118,16 @@ setInterval(function(){
             $("#display").empty();
             for (var key in response.messages)
             {
-                var temp="<div class='container darker'><b>"+response.users[key]+"</b><p>"+response.messages[key].text+"</p><span class='time-left'>"+response.messages[key].date_time+"</span></div>";
+                const username = "{{ username }}";
+                if (response.users[key] === username) {
+                    var temp="<div class='container lighter'><b>"+response.users[key]+"</b><p>"+response.messages[key].text+"</p><span class='time-left'>"+response.messages[key].date_time+"</span></div>";
+                    $("#display").append(temp);
+                }
+                else {
+                    var temp="<div class='container darker'><b>"+response.users[key]+"</b><p>"+response.messages[key].text+"</p><span class='time-left'>"+response.messages[key].date_time+"</span></div>";
                 $("#display").append(temp);
+                }
+
             }
         },
         error: function(response){

@@ -251,6 +251,7 @@ user_list_entry {
     justify-self: center;
     padding-right: 50px;
     padding-left: 50px;
+    width: 900px;
 }
 
 .chat_list_entry {
