@@ -22,7 +22,6 @@ class ChatAdmin(admin.ModelAdmin):
     list_display = ['name', 'server_id',]
     list_filter = ['user']
 
-
 class UserChatAdmin(admin.ModelAdmin):
     list_display =['user', 'chat']
 

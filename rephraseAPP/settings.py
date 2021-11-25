@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rephrase.apps.RephraseConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL = 'home'
 
 APPEND_SLASH = False
+
+CELERY_BROKER_URL ='redis://:pf9ee3be0bcc6a6ef8f12a2b5cb9e96e94dcd0510057c65988632397868221be4@ec2-34-196-200-201.compute-1.amazonaws.com:21490'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
