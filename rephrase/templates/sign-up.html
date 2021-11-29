@@ -1,19 +1,13 @@
 {% extends 'home.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li> {{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <h2>Sign up</h2>
+    <div class="container">
+    <h2>{%  trans 'Sign up' %}</h2>
     <form method="POST" class="form">
         {% csrf_token %}
         {% for field in form %}
-        <p>
+        <p class="p_form">
             {{ field.label_tag }}
             {{ field }}
             {% if field.help_text %}
@@ -24,6 +18,7 @@
             {% endfor %}
         </p>
         {% endfor %}
-            <button type="submit" class="btn">Sign Up</button>
+            <button type="submit" class="btn">{%  trans 'Sign up' %}</button>
     </form>
+    </div>
 {% endblock %}

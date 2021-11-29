@@ -1,0 +1,224 @@
+{% extends 'home.html' %}
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block content %}
+<style>
+body {
+    display: grid;
+    grid-template-columns: max-content auto max-content;
+    grid-template-rows: max-content;
+    grid-gap: 30px;
+    margin: 0;
+    background-color:  whitesmoke;
+}
+
+.container {
+  border: 2px solid #007cc7;
+  background-color:  #12232E;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+    float: left;
+}
+
+.lighter {
+    border-color: #007cc7;
+    background-color: #007cc7 ;
+    float: right;
+}
+
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+#display {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+
+</style>
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+</head>
+
+    <div class="popup">
+        <div class="container">
+            <div class="close" id="close">+</div>
+                <form method="POST" class="creat_chat_form">
+                {% csrf_token %}
+                    {% for field in create_chat_form %}
+                    <p class="p_form">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.help_text %}
+                <small style="color:  grey;">{{ field.help_text }}</small>
+            {% endif %}
+            {%  for error in field.errors %}
+                <p style="color: red;"> {{ error }}</p>
+            {% endfor %}
+        </p>
+        {% endfor %}
+            <button type="submit" class="btn">{%  trans 'Create Chat' %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="chat_container">
+    <h2>{{chat_details.name}}</h2>
+
+    <div id="display">
+    </div>
+
+    <script>
+        $(document).ready(function(){
+
+setInterval(function(){
+    $.ajax({
+        type: 'GET',
+        url : "/getMessages/{{chat_details.id}}/",
+        success: function(response){
+            console.log(response);
+            $("#display").empty();
+            for (var key in response.messages)
+            {
+                const username = "{{ username }}";
+                if (response.users[key] === username) {
+                    var temp="<div class='container lighter'><b>"+response.users[key]+"</b><p>"+response.messages[key]+"</p><span class='time-left'>"+response.date_time[key]+"</span></div>";
+                    $("#display").append(temp);
+                }
+                else {
+                    var temp="<div class='container darker'><b>"+response.users[key]+"</b><p>"+response.messages[key]+"</p><span class='time-left'>"+response.date_time[key]+"</span></div>";
+                $("#display").append(temp);
+                }
+
+            }
+        },
+        error: function(response){
+            alert('An error occured')
+        }
+    });
+},1000);
+})
+    </script>
+
+    <div class="container">
+        <style>
+        input[type=text], select {
+        width: 100%;
+        padding: 12px 12px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+
+        input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        }
+    
+        input[type=submit]:hover {
+        background-color: #45a049;
+        }
+    
+
+        </style>
+        <div class="chat">
+        <form id="post-form">
+            {% csrf_token %}
+            <input type="hidden" name="username" id="username" value="{{username}}"/>
+            <input type="hidden" name="chat_id" id="chat_id" value="{{chat_details.id}}"/>
+            <input type="text" name="message" id="message" width="100px" />
+            <input type="submit" value="Send">
+        </form>
+        </div>
+    </div>
+    </div>
+    <div class="left_side_container">
+    <div class="friends_header">
+                 <h2 class="account_titles" id="friends_title">{% trans 'Chats' %}</h2>
+                <div class="buttons">
+                    <button class="btn-chat" id="popup_btn" value="create_chat">{% trans 'Create Chat' %}</button>
+                </div>
+    </div>
+    <div class="chat_list">
+    {% for chat in chats %}
+        <div class="chat_list_entry">
+            <a class="chat_list_links" href="{% url 'chat' chat.id %}">{{ chat.name }}</a>
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+
+
+
+    
+    <script type="text/javascript">
+      $(document).on('submit','#post-form',function(e){
+        e.preventDefault();
+    
+        $.ajax({
+          type:'POST',
+          url:'/send',
+          data:{
+              username:$('#username').val(),
+              chat_id:$('#chat_id').val(),
+              message:$('#message').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+          },
+          success: function(data){
+            //  alert(data)
+          }
+        });
+        document.getElementById('message').value = ''
+      });
+    </script>
+{% block extrascripts %}<script src="{% static '/js/script.js' %}" type="text/javascript"></script>{% endblock %}
+    {% endblock %}
+</body>
+</html>
+

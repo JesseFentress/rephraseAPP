@@ -1,0 +1,26 @@
+{% extends 'home.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+    <div class="container">
+    <div class="edit_form">
+    <h2>{% trans 'Edit Account' %}</h2>
+    <form method="POST" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in edit_acc_form %}
+        <p>
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+                <small style="color:  grey;">{{ field.help_text }}</small>
+            {% endif %}
+            {%  for error in field.errors %}
+                <p style="color: red;"> {{ error }}</p>
+            {% endfor %}
+        </p>
+        {% endfor %}
+        <button type="submit" class="btn">{% trans 'Save' %}</button>
+     </form>
+    </div>
+    </div>
+{% endblock %}

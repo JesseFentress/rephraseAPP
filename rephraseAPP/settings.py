@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rephrase.apps.RephraseConfig',
+
 ]
 
 MIDDLEWARE = [
@@ -106,12 +107,6 @@ AUTH_USER_MODEL = 'rephrase.User'
 
 LANGUAGE_CODE = 'en-us'
 
-# LANGUAGE_CHOICES = (
-#         ('en', _('English')),
-#         ('de', _('German')),
-#         ('es', _('Spanish'))
-#     )
-
 TIME_ZONE = 'US/Eastern'
 
 USE_I18N = True
@@ -137,3 +132,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'rephrase/static/media/images/')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = 'home'
+
+APPEND_SLASH = False
+
+CELERY_BROKER_URL ='redis://:pf9ee3be0bcc6a6ef8f12a2b5cb9e96e94dcd0510057c65988632397868221be4@ec2-34-196-200-201.compute-1.amazonaws.com:21490'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'

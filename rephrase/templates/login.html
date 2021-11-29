@@ -1,5 +1,6 @@
 {% extends 'home.html' %}
 {% load static %}
+{% load i18n %}
 {%  block content %}
 
     {% if messages %}
@@ -9,7 +10,9 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <h2>Login</h2>
+    <div class="login">
+    <div class="container">
+    <h2>{% trans 'Log In' %}</h2>
     <form method="POST" class="form">
         {% csrf_token %}
         {% for field in log_form %}
@@ -31,4 +34,6 @@
         {% endfor %}
             <button type="submit" class="btn">Login</button>
     </form>
+    </div>
+    </div>
 {% endblock %}
