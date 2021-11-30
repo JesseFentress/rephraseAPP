@@ -1,0 +1,123 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-22 11:45-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\rephrase\forms.py:9
+msgid "Username is required"
+msgstr "E richiesto il nome utente"
+
+#: .\rephrase\forms.py:10
+msgid "Email is required"
+msgstr "L'email e obbligatoria"
+
+#: .\rephrase\forms.py:11 .\rephrase\forms.py:22
+msgid "Select Your Language"
+msgstr "Seleziona Una Lingua"
+
+#: .\rephrase\forms.py:20
+msgid "First Name"
+msgstr "Nome de Battesimo"
+
+#: .\rephrase\forms.py:21
+msgid "Last Name"
+msgstr "Cognome"
+
+#: .\rephrase\forms.py:23
+msgid "Choose an Image"
+msgstr "Scegli Un'immagine"
+
+#: .\rephrase\forms.py:35
+msgid "Chat Name"
+msgstr "Nome Chat"
+
+#: .\rephrase\forms.py:36
+msgid "Server Number"
+msgstr "Numero di Server"
+
+#: .\rephrase\templates\account.html:13
+msgid "Find Friends"
+msgstr "Trova Amici"
+
+#: .\rephrase\templates\account.html:15
+msgid "Add Friend"
+msgstr "Trova Amici"
+
+#: .\rephrase\templates\account.html:47
+msgid "Friends"
+msgstr "Amici"
+
+#: .\rephrase\templates\account.html:49
+msgid "Add"
+msgstr "Aggiungi Amico"
+
+#: .\rephrase\templates\account.html:50
+msgid "Search"
+msgstr "Ricerca"
+
+#: .\rephrase\templates\account.html:60
+msgid "Message"
+msgstr "Messagio"
+
+#: .\rephrase\templates\chat.html:88 .\rephrase\templates\chat.html:172
+#: .\rephrase\templates\home.html:32
+msgid "Create Chat"
+msgstr "Creare Chat"
+
+#: .\rephrase\templates\chat.html:170 .\rephrase\templates\home.html:30
+msgid "Chats"
+msgstr "Chats"
+
+#: .\rephrase\templates\edit.html:7
+msgid "Edit Account"
+msgstr "Modifica Account"
+
+#: .\rephrase\templates\edit.html:22
+msgid "Save"
+msgstr "Conservare"
+
+#: .\rephrase\templates\home.html:14
+msgid "Home"
+msgstr "Home Page"
+
+#: .\rephrase\templates\home.html:17
+msgid "Chat"
+msgstr "Chat"
+
+#: .\rephrase\templates\home.html:18
+msgid "My Account"
+msgstr "Account"
+
+#: .\rephrase\templates\home.html:19
+msgid "Log Out"
+msgstr "Disconnettersi"
+
+#: .\rephrase\templates\home.html:21 .\rephrase\templates\login.html:15
+msgid "Log In"
+msgstr "Accesso"
+
+#: .\rephrase\templates\home.html:22
+msgid "Sign Up"
+msgstr "Iscrivit"
+
+#: .\rephrase\templates\home.html:45
+msgid "Inter-language Communication Made Easy"
+msgstr "Commucazione Interlingua Fascile"
+
+#: .\rephrase\templates\sign-up.html:6 .\rephrase\templates\sign-up.html:21
+msgid "Sign up"
+msgstr "Iscrivit"
