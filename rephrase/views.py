@@ -81,6 +81,7 @@ def user_logout(request):
 def account(request):
     context = {}
     curr_user = request.user
+    request.session['language'] = request.user.language
     try:
         friend_list = FriendsList.objects.get(user=curr_user)
     except FriendsList.DoesNotExist:

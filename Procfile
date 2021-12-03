@@ -1,1 +1,1 @@
-web:
+web: gunicorn rephraseAPP.wsgi --log-file -
