@@ -16,8 +16,6 @@ def translate_message(request, message):
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-
-    print(response.text)
     text = response.json()
     return text['data']['translation']
 

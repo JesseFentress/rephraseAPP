@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 11:44-0500\n"
+"POT-Creation-Date: 2021-11-30 23:23-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,70 +17,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\rephrase\forms.py:9
+#: .\rephrase\forms.py:10
 msgid "Username is required"
 msgstr "Nom d'utilisateur est requis"
 
-#: .\rephrase\forms.py:10
+#: .\rephrase\forms.py:11
 msgid "Email is required"
 msgstr "Email est requis"
 
-#: .\rephrase\forms.py:11 .\rephrase\forms.py:22
+#: .\rephrase\forms.py:12 .\rephrase\forms.py:23
 msgid "Select Your Language"
 msgstr "Slectionnex Une Langue"
 
-#: .\rephrase\forms.py:20
+#: .\rephrase\forms.py:21
 msgid "First Name"
 msgstr "Prenom"
 
-#: .\rephrase\forms.py:21
+#: .\rephrase\forms.py:22
 msgid "Last Name"
 msgstr "Nom de Famille"
 
-#: .\rephrase\forms.py:23
+#: .\rephrase\forms.py:24
 msgid "Choose an Image"
 msgstr "Choisir Une Image"
 
-#: .\rephrase\forms.py:35
+#: .\rephrase\forms.py:37
 #, fuzzy
 #| msgid "Chat"
 msgid "Chat Name"
 msgstr "Nom du Chat"
 
-#: .\rephrase\forms.py:36
+#: .\rephrase\forms.py:38
 msgid "Server Number"
 msgstr "Numero de Serveur"
 
-#: .\rephrase\templates\account.html:13
+#: .\rephrase\templates\account.html:23
 msgid "Find Friends"
 msgstr "Retrouver des Amis"
 
-#: .\rephrase\templates\account.html:15
+#: .\rephrase\templates\account.html:25
 msgid "Add Friend"
 msgstr "Ajouter un Ami"
 
-#: .\rephrase\templates\account.html:47
+#: .\rephrase\templates\account.html:43
+msgid "Hello"
+msgstr "Bonjour"
+
+#: .\rephrase\templates\account.html:51
+msgid "Edit Profile"
+msgstr "Editer Le Profil"
+
+#: .\rephrase\templates\account.html:57
 msgid "Friends"
 msgstr "Amis"
 
-#: .\rephrase\templates\account.html:49
+#: .\rephrase\templates\account.html:59
 msgid "Add"
 msgstr "Ajouter"
 
-#: .\rephrase\templates\account.html:50
+#: .\rephrase\templates\account.html:60
 msgid "Search"
 msgstr "Chercher"
 
-#: .\rephrase\templates\account.html:60
+#: .\rephrase\templates\account.html:70
 msgid "Message"
 msgstr "Message"
 
-#: .\rephrase\templates\chat.html:88 .\rephrase\templates\chat.html:172
-#: .\rephrase\templates\home.html:32
+#: .\rephrase\templates\chat.html:96 .\rephrase\templates\chat.html:185
+#: .\rephrase\templates\empty-chat.html:48
+#: .\rephrase\templates\empty-chat.html:80
 msgid "Create Chat"
 msgstr "Creer une Discussion"
 
-#: .\rephrase\templates\chat.html:170 .\rephrase\templates\home.html:30
+#: .\rephrase\templates\chat.html:183 .\rephrase\templates\empty-chat.html:78
 msgid "Chats"
 msgstr "Discuter"
 
@@ -92,33 +101,43 @@ msgstr "Modifier le Compte"
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: .\rephrase\templates\home.html:14
+#: .\rephrase\templates\home.html:16
 msgid "Home"
 msgstr "D'accueil"
 
-#: .\rephrase\templates\home.html:17
+#: .\rephrase\templates\home.html:19
 msgid "Chat"
 msgstr "Discuter"
 
-#: .\rephrase\templates\home.html:18
+#: .\rephrase\templates\home.html:20
 msgid "My Account"
 msgstr "Compte"
 
-#: .\rephrase\templates\home.html:19
+#: .\rephrase\templates\home.html:21
 msgid "Log Out"
 msgstr "Deconnecter"
 
-#: .\rephrase\templates\home.html:21 .\rephrase\templates\login.html:15
+#: .\rephrase\templates\home.html:23 .\rephrase\templates\login.html:15
 msgid "Log In"
 msgstr "Connexion"
 
-#: .\rephrase\templates\home.html:22
+#: .\rephrase\templates\home.html:24 .\rephrase\templates\home.html:48
 msgid "Sign Up"
 msgstr "S'inscrire"
 
-#: .\rephrase\templates\home.html:45
+#: .\rephrase\templates\home.html:34
 msgid "Inter-language Communication Made Easy"
 msgstr "La Communication Interlangue Simplifiee"
+
+#: .\rephrase\templates\home.html:40
+msgid "Start Chatting"
+msgstr "Commencer A Discuter"
+
+#: .\rephrase\templates\home.html:43
+#, fuzzy
+#| msgid "My Account"
+msgid "Account"
+msgstr "Compte"
 
 #: .\rephrase\templates\sign-up.html:6 .\rephrase\templates\sign-up.html:21
 msgid "Sign up"
