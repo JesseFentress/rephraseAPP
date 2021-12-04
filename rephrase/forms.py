@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from rephrase.models import User, FriendsList, Chat
+from rephrase.models import User, FriendsList, Chat, Server
 from django.conf.global_settings import LANGUAGES
 from django.utils.translation import gettext as _
 
@@ -33,9 +33,10 @@ class CreateChatForm(forms.ModelForm):
         self.user = user
         super(CreateChatForm, self).__init__(*args, **kwargs)
         self.fields['user'].queryset = FriendsList.objects.get(user=user).friends.all()
+        self.fields['server'].queryset = Server.objects.all()
 
     name = forms.CharField(label=_('Chat Name'), max_length=50)
-    server = forms.IntegerField(label=_('Server Number'), required=False)
+    server = forms.Select()
     user = forms.SelectMultiple()
 
     class Meta:
