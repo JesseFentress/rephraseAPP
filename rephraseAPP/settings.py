@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-9@hjss3@!4e_ri)jwdbzyk&b$su$_ojsx-8)ne_!d%*vtf)8f&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'app-rephrase.herokuapp.com',
+    '127.0.0.1',
+]
 
 # Application definition
 
@@ -77,8 +80,12 @@ WSGI_APPLICATION = 'rephraseAPP.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(BASE_DIR / 'db.sqlite3'),
+        'ENGINE'  : 'django.db.backends.postgresql',
+        'NAME'    : 'd7kvn8kpnl4lce',
+        'HOST'    : 'ec2-3-95-130-249.compute-1.amazonaws.com',
+        'PORT'    : '5432',
+        'USER'    : 'izdapsuidxrubb',
+        'PASSWORD': '76fadf0bce46914ffce3896b74136a3e3736676eac6ddc7c35b5bbb49c870ff8',
     }
 }
 
