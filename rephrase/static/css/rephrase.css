@@ -5,7 +5,7 @@
 
 body {
     display: grid;
-    grid-template-columns: max-content auto max-content;
+    grid-template-columns: auto max-content auto;
     grid-template-rows: max-content;
     grid-gap: 30px;
     margin: 0;
@@ -21,6 +21,7 @@ header {
 .brand {
     grid-column-start: 2;
     grid-column-end: 3;
+    height: 50px;
 }
 
 li {
@@ -279,4 +280,32 @@ user_list_entry {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+.main_btns {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: flex;
+    white-space: break-spaces;
+    justify-content: center;
+}
+
+.main_btns button {
+    width: 200px;
+    height: 100px;
+}
+
+.main_btn button:hover {
+    width: 250px;
+    height: 125px;
+}
+
+.button_text {
+    font-size: x-large;
+}
+
+.home_img {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    z-index: -1;
 }

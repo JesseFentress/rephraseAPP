@@ -1,7 +1,8 @@
 *.pyc  
 *~  
 __pycache__
-myvenv  
+myvenv
+/node_modules
 *.sqlite3
 .DS_Store
 .idea

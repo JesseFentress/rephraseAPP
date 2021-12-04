@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-22 11:45-0500\n"
+"POT-Creation-Date: 2021-11-30 23:23-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,68 +17,77 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\rephrase\forms.py:9
+#: .\rephrase\forms.py:10
 msgid "Username is required"
 msgstr "Ein benutzername ist erforderlich"
 
-#: .\rephrase\forms.py:10
+#: .\rephrase\forms.py:11
 msgid "Email is required"
 msgstr "Email is erforderlich"
 
-#: .\rephrase\forms.py:11 .\rephrase\forms.py:22
+#: .\rephrase\forms.py:12 .\rephrase\forms.py:23
 msgid "Select Your Language"
 msgstr "Wahle eine Sprache"
 
-#: .\rephrase\forms.py:20
+#: .\rephrase\forms.py:21
 msgid "First Name"
 msgstr "Vorname"
 
-#: .\rephrase\forms.py:21
+#: .\rephrase\forms.py:22
 msgid "Last Name"
 msgstr "Nachname"
 
-#: .\rephrase\forms.py:23
+#: .\rephrase\forms.py:24
 msgid "Choose an Image"
 msgstr "Wahle ein Bild aus"
 
-#: .\rephrase\forms.py:35
+#: .\rephrase\forms.py:37
 msgid "Chat Name"
 msgstr "Chat Name"
 
-#: .\rephrase\forms.py:36
+#: .\rephrase\forms.py:38
 msgid "Server Number"
 msgstr "Servernummer"
 
-#: .\rephrase\templates\account.html:13
+#: .\rephrase\templates\account.html:23
 msgid "Find Friends"
 msgstr "Freunde Finden"
 
-#: .\rephrase\templates\account.html:15
+#: .\rephrase\templates\account.html:25
 msgid "Add Friend"
 msgstr "Freund Hinzufugen"
 
-#: .\rephrase\templates\account.html:47
+#: .\rephrase\templates\account.html:43
+msgid "Hello"
+msgstr "Hallo"
+
+#: .\rephrase\templates\account.html:51
+msgid "Edit Profile"
+msgstr "Profil Bearbeiten"
+
+#: .\rephrase\templates\account.html:57
 msgid "Friends"
 msgstr "Freunde"
 
-#: .\rephrase\templates\account.html:49
+#: .\rephrase\templates\account.html:59
 msgid "Add"
 msgstr "Hinzufugen"
 
-#: .\rephrase\templates\account.html:50
+#: .\rephrase\templates\account.html:60
 msgid "Search"
 msgstr "Recherche"
 
-#: .\rephrase\templates\account.html:60
+#: .\rephrase\templates\account.html:70
 msgid "Message"
 msgstr "Chatten"
 
-#: .\rephrase\templates\chat.html:88 .\rephrase\templates\chat.html:172
-#: .\rephrase\templates\home.html:32
+#: .\rephrase\templates\chat.html:96 .\rephrase\templates\chat.html:185
+#: .\rephrase\templates\empty-chat.html:48
+#: .\rephrase\templates\empty-chat.html:80
 msgid "Create Chat"
 msgstr "Chat Schaffen"
 
-#: .\rephrase\templates\chat.html:170 .\rephrase\templates\home.html:30
+#: .\rephrase\templates\chat.html:183 .\rephrase\templates\empty-chat.html:78
 msgid "Chats"
 msgstr "Chat"
 
@@ -90,33 +99,43 @@ msgstr "Benutxerkonto Bearbeiten"
 msgid "Save"
 msgstr "Senden"
 
-#: .\rephrase\templates\home.html:14
+#: .\rephrase\templates\home.html:16
 msgid "Home"
 msgstr "Home"
 
-#: .\rephrase\templates\home.html:17
+#: .\rephrase\templates\home.html:19
 msgid "Chat"
 msgstr "Chat"
 
-#: .\rephrase\templates\home.html:18
+#: .\rephrase\templates\home.html:20
 msgid "My Account"
 msgstr "Benutzerkonto"
 
-#: .\rephrase\templates\home.html:19
+#: .\rephrase\templates\home.html:21
 msgid "Log Out"
 msgstr "Ausloggen"
 
-#: .\rephrase\templates\home.html:21 .\rephrase\templates\login.html:15
+#: .\rephrase\templates\home.html:23 .\rephrase\templates\login.html:15
 msgid "Log In"
 msgstr "Einloggen"
 
-#: .\rephrase\templates\home.html:22
+#: .\rephrase\templates\home.html:24 .\rephrase\templates\home.html:48
 msgid "Sign Up"
 msgstr "Anmeldung"
 
-#: .\rephrase\templates\home.html:45
+#: .\rephrase\templates\home.html:34
 msgid "Inter-language Communication Made Easy"
 msgstr "Intersprachliche Kommmunkation Leicht Gemacht"
+
+#: .\rephrase\templates\home.html:40
+msgid "Start Chatting"
+msgstr "Fang An Zu Chatten"
+
+#: .\rephrase\templates\home.html:43
+#, fuzzy
+#| msgid "My Account"
+msgid "Account"
+msgstr "Benutzerkonto"
 
 #: .\rephrase\templates\sign-up.html:6 .\rephrase\templates\sign-up.html:21
 msgid "Sign up"

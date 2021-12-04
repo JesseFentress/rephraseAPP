@@ -29,11 +29,7 @@ def home(request):
     if user.is_authenticated:
         request.session['language'] = request.user.language
         message_sessions(request)
-        context['c'] = []
-        for key, value in request.session.items():
-            context['c'].append('{} => {}'.format(key, value))
     return render(request, 'home.html', context)
-
 
 
 def sign_up(request):
@@ -85,6 +81,7 @@ def user_logout(request):
 def account(request):
     context = {}
     curr_user = request.user
+    request.session['language'] = request.user.language
     try:
         friend_list = FriendsList.objects.get(user=curr_user)
     except FriendsList.DoesNotExist:
@@ -118,7 +115,7 @@ def account(request):
         friend_username = request.POST['friend_username']
         if User.objects.filter(username=friend_username):
             friend_list.add_friend(User.objects.get(username=friend_username))
-            return render(request, "account.html", context)
+            return redirect('account')
         else:
             message = 'Username entered does not exist'
             context['error'] = message
@@ -131,6 +128,7 @@ def edit_account(request):
     edit_acc_form = EditUserForm(request.POST, request.FILES, instance=user)
     if edit_acc_form.is_valid():
         edit_acc_form.save()
+        request.session['language'] = request.user.language
         return redirect('account')
     else:
         edit_acc_form = EditUserForm()
@@ -142,9 +140,11 @@ def chat_redirect(request):
     current_user = request.user
     context = {}
     userchats = list(Chat.objects.filter(user=current_user))
+    create_chat_form = CreateChatForm(request.user, request.POST)
+    context['create_chat_form'] = create_chat_form
     if len(userchats) == 0:
-        create_chat_form = CreateChatForm(request.user)
-        context['create_chat_form'] = create_chat_form
+       # create_chat_form = CreateChatForm(request.user)
+        #context['create_chat_form'] = create_chat_form
         if request.method == 'POST':
             form = CreateChatForm(request.user, request.POST)
             if form.is_valid():
@@ -152,9 +152,10 @@ def chat_redirect(request):
                 chat_name = form.cleaned_data['name']
                 form.save()
                 Chat.objects.get(name=chat_name).user.add(current_user)
+                return redirect('chat', Chat.objects.get(name=chat_name).id)
             else:
                 context['create_chat_form'] = create_chat_form
-        return render(request, 'empty-chat.html')
+        return render(request, 'empty-chat.html', context)
     else:
         return chat(request, userchats.pop().id)
 
@@ -178,7 +179,7 @@ def chat(request, chat_id):
     create_chat_form = CreateChatForm(request.user)
     context['create_chat_form'] = create_chat_form
     if request.method == 'POST':
-        form = CreateChatForm(request.user,request.POST)
+        form = CreateChatForm(request.user, request.POST)
         if form.is_valid():
             form.save(commit=False)
             chat_name = form.cleaned_data['name']
