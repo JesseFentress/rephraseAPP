@@ -198,8 +198,8 @@ button {
 
 button:hover, button:focus {
    cursor: pointer;
-   background-color: white;
-   color: #5680e9;
+   background-color: #4E69AE;
+   color: white;
    transitions: 0.4s;
    border: white;
 }
@@ -309,3 +309,4 @@ user_list_entry {
     grid-column-end: 3;
     z-index: -1;
 }
+
