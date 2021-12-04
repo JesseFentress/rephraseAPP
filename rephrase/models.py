@@ -133,36 +133,3 @@ class FriendsList(models.Model):
         for friend in my_friend_list:
             list.append(friend)
         return f_list
-
-
-class FriendRequest(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
-    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver')
-    is_active = models.BooleanField(blank=True, null=False, default=True)
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.sender.username
-
-    def accept(self):
-        receiver_friends_list = FriendsList.objects.get(user=self)
-        if receiver_friends_list:
-            receiver_friends_list.add_friend(self.sender)
-            sender_fiends_list = FriendsList.objects.get(user=self.sender)
-            if sender_fiends_list:
-                sender_fiends_list.add_friend(self.receiver)
-                self.is_active = False
-                self.save()
-
-    def decline(self):
-        self.is_active = False
-        self.save()
-
-    def cancel(self):
-        self.is_active = False
-        self.save()
-
-
-class UserChat(models.Model):
-    user = models.ForeignKey(User, verbose_name='user', null=False, on_delete=models.CASCADE)
-    chat = models.ForeignKey(Chat, verbose_name='chat', null=False, on_delete=models.CASCADE)

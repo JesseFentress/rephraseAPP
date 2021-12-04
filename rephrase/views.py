@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse, JsonResponse
 from rephrase.forms import UserRegistrationForm, EditUserForm, CreateChatForm
-from rephrase.models import Chat, Message, User, UserChat
+from rephrase.models import Chat, Message, User
 from rephrase.Graph import Graph
 from .tasks import translate_message, message_sessions
 import requests
@@ -19,12 +19,6 @@ from rephrase.models import FriendsList, User
 def home(request):
     context = {}
     user = request.user
-    # del request.session['message_ids_2']
-    # del request.session['message_ids_26']
-    #del request.session['message_ids_1']
-    # del request.session['chat_messages_2']
-    # del request.session['chat_messages_26']
-    #del request.session['chat_messages_1']
 
     if user.is_authenticated:
         request.session['language'] = request.user.language
