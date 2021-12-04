@@ -14,7 +14,9 @@ urlpatterns = [
     path('chats/', views.chat_redirect, name='chat-list'),
     path('chats/<int:chat_id>/', views.chat, name='chat'),
     path('send', views.send, name='send'),
-    path('getMessages/<int:chat_id>/', views.getMessages, name='getMessages')
+    path('getMessages/<int:chat_id>/', views.getMessages, name='getMessages'),
+    path('index', views.index, name='index'),
+    path('<str:room_name>/', views.room, name='room'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
