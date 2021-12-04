@@ -82,7 +82,7 @@ class Server(models.Model):
 
 class Chat(models.Model):
     name = models.CharField(verbose_name='chat name', max_length=50)
-    server = models.ForeignKey(Server, verbose_name='server', null=True, on_delete=models.CASCADE)
+    server = models.ForeignKey(Server, verbose_name='server', null=True, blank=True, on_delete=models.CASCADE)
     user = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='chat_users', blank=True, related_name='chat_users')
     
     def __str__(self):
