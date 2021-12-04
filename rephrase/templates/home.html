@@ -18,6 +18,7 @@
                 {% if user.is_authenticated %}
                     <li><div class="nav_div"><a class="hd-link" href="{% url 'chat-list' %}" class="link">{% trans 'Chat' %}</a></li></div>
                     <li><div class="nav_div"><a class="hd-link" href="{% url 'account' %}"> {% trans 'My Account' %}</a></li></div>
+                    <li> <a href="{% url 'index' %}"><button class="btn-home" id="index">Server</button></a></li>
                     <li><div class="nav_div"><a class="hd-link" href="{% url 'logout' %}">{% trans 'Log Out' %}</a></li></div>
                 {% else %}
                     <li><div class="nav_div"><a class="hd-link" href="{% url 'login' %}">{% trans 'Log In' %}</a></li></div>

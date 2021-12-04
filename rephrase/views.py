@@ -211,3 +211,11 @@ def getMessages(request, chat_id):
     else:
         return JsonResponse({'messages': [], 'users': [], 'date_time': []})
 
+
+def index(request):
+    return render(request, 'index.html', {})
+
+def room(request, room_name):
+    return render(request, 'room.html', {
+        'room_name': room_name
+    })
