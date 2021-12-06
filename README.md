@@ -2,7 +2,7 @@
 translation application
 This application can be found on Heroku at: https://app-rephrase.herokuapp.com/
 * Create an account *
-* Add users Jesse, or bew1998, and create a chat to test the code*
+* Add users Jesse, or bew5294, and create a chat to test the code*
 
 #####################
 Dependencies include: 
