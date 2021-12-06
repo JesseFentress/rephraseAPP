@@ -1,21 +1,43 @@
-# rephraseAPP
-translation application
-This application can be found on Heroku at: https://app-rephrase.herokuapp.com/
-* Create an account *
-* Add users Jesse, or bew5294, and create a chat to test the code*
+# Rephrase: Translation Application
+#### _Inter-language Communication Made Easy_
+##### Run Hosted:
 
-#####################
-Dependencies include: 
-celery==5.2.1
-Django==3.2.9
-gunicorn==20.1.0
-Pillow==8.4.0
-psycopg2-binary==2.9.2
-requests==2.22.0
+Follow this link:
+https://app-rephrase.herokuapp.com/
+* Create an account by clicking the "Sign Up" button in the navigation bar
+* Add users Jesse or bew5294 as friends from the account page (Account button in the navigation bar)
+* Click Chat in the navigation bar
+* Create a chat to use the application
 
-* psycopg2-binary and gunicorn are dependecy that are required to host the app on Heroku and are not need to run the code locally. *
-* gunicorn requires a Linux system to run *
+##### Run Locally:
 
-#####################
-If running locally,  "python manage.py makemigrations" and "python manage.py migrate in the project directory to configure the database, then "python manage.py runserver" to run
-the application locally. There will be no data as the application will be running on a local database, therefore, new users/chats/messages will need to be created to test the code.
+1. Run the following command from the project directory
+to install the dependencies used in this project.
+```bash
+pip install -r requirements.txt
+```
+or
+```bash
+pip3 install -r requirements.txt
+```
+
+2. Run the following command from the project directory
+to host the project locally
+
+**For Windows:**
+
+```bash
+py manage.py runserver
+```
+
+**For Mac or Linux:**
+```bash
+python manage.py runserver
+```
+
+3. Follow the link in the command prompt to open locally hosted website
+the default is 
+
+```sh
+127.0.0.1:8000/
+```
