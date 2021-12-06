@@ -14,6 +14,7 @@ psycopg2-binary==2.9.2
 requests==2.22.0
 
 * psycopg2-binary and gunicorn are dependecy that are required to host the app on Heroku and are not need to run the code locally. *
+* gunicorn requires a Linux system to run *
 
 #####################
 If running locally,  "python manage.py makemigrations" and "python manage.py migrate in the project directory to configure the database, then "python manage.py runserver" to run
