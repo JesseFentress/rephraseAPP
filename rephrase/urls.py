@@ -4,6 +4,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
 
+# Handles the sites urls and matches them to corresponding view functions to handle loading HTML and user interaction
 urlpatterns = [
     path('', views.home, name='home'),
     path('sign-up/', views.sign_up, name='sign-up'),
@@ -17,4 +18,5 @@ urlpatterns = [
     path('getMessages/<int:chat_id>/', views.getMessages, name='getMessages')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += staticfiles_urlpatterns()
+urlpatterns += staticfiles_urlpatterns()  # This is for accessing the static files of the site such as images
+
