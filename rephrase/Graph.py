@@ -117,11 +117,11 @@ class Graph:
         return friends
 
     def bfs(self):
-        friends = set()
-        for indices in self.graph_dict:
-            friends = friends.union(set(self.bfs_traversal(indices)))
-        f = list(friends)
-        return f
+        friends = set()  # Empty set
+        for indices in self.graph_dict:  # Iterate through the indices
+            friends = friends.union(set(self.bfs_traversal(indices)))  # Perform bfs traversal on all friends to get their friends
+        f = list(friends)  # Convert the set to a list to return
+        return f  # Return the list
 
 
     def dfs_traversal(self, start_vertex):  # Prints out DFS traversal
